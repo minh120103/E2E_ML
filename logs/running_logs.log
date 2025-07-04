@@ -1,0 +1,388 @@
+[2025-07-03 13:27:30,049: INFO: main: Starting the fraud detection application...]
+[2025-07-03 15:58:41,303: INFO: main: Starting the fraud detection application...]
+[2025-07-03 15:58:41,303: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-03 15:58:41,303: INFO: data_ingestion: >>> Stage Data Ingestion stage started <<<]
+[2025-07-03 15:58:41,305: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-03 15:58:41,306: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-03 15:58:41,307: ERROR: main: yaml file is empty]
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\utils\common.py", line 33, in read_yaml
+    return ConfigBox(content)
+           ^^^^^^^^^^^^^^^^^^
+  File "box\\box.py", line 283, in box.box.Box.__init__
+box.exceptions.BoxValueError: Cannot extrapolate Box from string
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\data_ingestion.py", line 11, in main
+    config = ConfigurationManager()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\config\configuration.py", line 12, in __init__
+    self.params = read_yaml(params_filepath)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\ensure\main.py", line 872, in __call__
+    return_val = self.f(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\utils\common.py", line 35, in read_yaml
+    raise ValueError("yaml file is empty")
+ValueError: yaml file is empty
+[2025-07-03 16:05:13,358: INFO: main: Starting the fraud detection application...]
+[2025-07-03 16:05:13,359: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-03 16:05:13,359: INFO: data_ingestion: >>> Stage Data Ingestion stage started <<<]
+[2025-07-03 16:05:13,360: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-03 16:05:13,362: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-03 16:05:13,362: INFO: common: created directory at: artifacts]
+[2025-07-03 16:05:13,362: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-03 16:05:13,363: INFO: common: created directory at: artifacts/data_version]
+[2025-07-03 16:05:13,363: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-03 16:05:13,363: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-03 16:05:13,388: INFO: data_ingestion: Loaded dataset with 1000 rows]
+[2025-07-03 16:05:13,388: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-03 16:05:13,389: ERROR: main: cannot unpack non-iterable NoneType object]
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\data_ingestion.py", line 15, in main
+    X_train, X_test, y_train, y_test,_,_ = data_ingestion.data_ingestion_pipeline()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+[2025-07-04 11:06:50,459: INFO: main: Starting the fraud detection application...]
+[2025-07-04 11:06:50,460: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 11:06:50,460: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-04 11:06:50,472: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-04 11:06:50,482: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-04 11:06:50,483: INFO: common: created directory at: artifacts]
+[2025-07-04 11:06:50,483: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-04 11:06:50,484: INFO: common: created directory at: artifacts/data_version]
+[2025-07-04 11:06:50,484: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-04 11:06:50,484: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-04 11:06:50,509: INFO: data_ingestion: Loaded dataset with 1000 rows]
+[2025-07-04 11:06:50,509: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:06:50,510: INFO: data_ingestion: Starting preprocessing of 1000 rows...]
+[2025-07-04 11:06:50,510: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:06:50,518: INFO: data_ingestion: After feature engineering columns: ['step', 'type', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver']]
+[2025-07-04 11:06:50,518: INFO: data_ingestion: Data shape after feature engineering: (1000, 8)]
+[2025-07-04 11:06:50,531: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      type      amount  oldbalanceOrg  oldbalanceDest  isFraud  MoneySpentSender  MoneyReceiver
+0   278   CASH_IN   330218.42       20866.00       452419.57        0        -330218.42      330218.42
+1    15   PAYMENT    11647.08       30370.00            0.00        0          11647.08           0.00
+2    10   CASH_IN   152264.21      106589.00       201303.01        0        -152264.21      152264.21
+3   403  TRANSFER  1551760.63           0.00      3198359.45        0              0.00    -1551760.63
+4   206   CASH_IN    78172.30     2921331.58       415821.90        0         -78172.30       78172.30]
+[2025-07-04 11:06:50,531: INFO: data_ingestion: After encoding columns: ['step', 'type', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver']]
+[2025-07-04 11:06:50,532: INFO: data_ingestion: Data shape after encoding: (1000, 8)]
+[2025-07-04 11:06:50,533: INFO: data_ingestion: Data shape after removing NaN: (1000, 8)]
+[2025-07-04 11:06:50,533: ERROR: data_ingestion: Churn column not found! Available columns: ['step', 'type', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver']]
+[2025-07-04 11:06:50,533: ERROR: main: 'Churn column is missing after preprocessing']
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\preprocess_data.py", line 15, in main
+    X_train, X_test, y_train, y_test,_,_ = data_ingestion.data_ingestion_pipeline()
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 52, in data_ingestion_pipeline
+    X, y, df_processed = self.preprocess_data(df)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 86, in preprocess_data
+    raise KeyError("Churn column is missing after preprocessing")
+KeyError: 'Churn column is missing after preprocessing'
+[2025-07-04 11:07:59,298: INFO: main: Starting the fraud detection application...]
+[2025-07-04 11:07:59,299: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 11:07:59,299: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-04 11:07:59,303: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-04 11:07:59,304: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-04 11:07:59,305: INFO: common: created directory at: artifacts]
+[2025-07-04 11:07:59,306: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-04 11:07:59,306: INFO: common: created directory at: artifacts/data_version]
+[2025-07-04 11:07:59,307: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-04 11:07:59,307: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-04 11:07:59,325: INFO: data_ingestion: Loaded dataset with 1000 rows]
+[2025-07-04 11:07:59,326: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:07:59,326: INFO: data_ingestion: Starting preprocessing of 1000 rows...]
+[2025-07-04 11:07:59,327: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:07:59,332: INFO: data_ingestion: After feature engineering columns: ['step', 'type', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver']]
+[2025-07-04 11:07:59,333: INFO: data_ingestion: Data shape after feature engineering: (1000, 8)]
+[2025-07-04 11:07:59,346: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      type      amount  oldbalanceOrg  oldbalanceDest  isFraud  MoneySpentSender  MoneyReceiver
+0   278   CASH_IN   330218.42       20866.00       452419.57        0        -330218.42      330218.42
+1    15   PAYMENT    11647.08       30370.00            0.00        0          11647.08           0.00
+2    10   CASH_IN   152264.21      106589.00       201303.01        0        -152264.21      152264.21
+3   403  TRANSFER  1551760.63           0.00      3198359.45        0              0.00    -1551760.63
+4   206   CASH_IN    78172.30     2921331.58       415821.90        0         -78172.30       78172.30]
+[2025-07-04 11:07:59,346: INFO: data_ingestion: After encoding columns: ['step', 'type', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver']]
+[2025-07-04 11:07:59,347: INFO: data_ingestion: Data shape after encoding: (1000, 8)]
+[2025-07-04 11:07:59,349: INFO: data_ingestion: Data shape after removing NaN: (1000, 8)]
+[2025-07-04 11:07:59,352: INFO: data_ingestion: X shape (features): (1000, 7)]
+[2025-07-04 11:07:59,352: INFO: data_ingestion: y shape (target): (1000,)]
+[2025-07-04 11:07:59,353: INFO: data_ingestion: Target variable shape: (1000,)]
+[2025-07-04 11:07:59,353: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-04 11:07:59,356: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.996
+1    0.004
+Name: proportion, dtype: float64]
+[2025-07-04 11:07:59,357: INFO: data_ingestion: Final feature matrix shape: (1000, 7)]
+[2025-07-04 11:07:59,358: INFO: data_ingestion: Final target vector shape: (1000,)]
+[2025-07-04 11:07:59,359: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.996
+1    0.004
+Name: proportion, dtype: float64]
+[2025-07-04 11:07:59,359: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-04 11:07:59,365: ERROR: main: could not convert string to float: 'CASH_IN']
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\preprocess_data.py", line 15, in main
+    X_train, X_test, y_train, y_test,_,_ = data_ingestion.data_ingestion_pipeline()
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 52, in data_ingestion_pipeline
+    X, y, df_processed = self.preprocess_data(df)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 118, in preprocess_data
+    X_res, y_res = smote.fit_resample(X, y)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\base.py", line 202, in fit_resample
+    return super().fit_resample(X, y, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\base.py", line 99, in fit_resample
+    X, y, binarize_y = self._check_X_y(X, y)
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\base.py", line 157, in _check_X_y
+    X, y = validate_data(self, X=X, y=y, reset=True, accept_sparse=accept_sparse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\utils\validation.py", line 2961, in validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\utils\validation.py", line 1370, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\utils\validation.py", line 1055, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\utils\_array_api.py", line 832, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\pandas\core\generic.py", line 2153, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: 'CASH_IN'
+[2025-07-04 11:14:46,378: INFO: main: Starting the fraud detection application...]
+[2025-07-04 11:14:46,379: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 11:14:46,379: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-04 11:14:46,382: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-04 11:14:46,382: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-04 11:14:46,383: INFO: common: created directory at: artifacts]
+[2025-07-04 11:14:46,383: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-04 11:14:46,384: INFO: common: created directory at: artifacts/data_version]
+[2025-07-04 11:14:46,384: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-04 11:14:46,384: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-04 11:14:46,394: INFO: data_ingestion: Loaded dataset with 1000 rows]
+[2025-07-04 11:14:46,394: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:14:46,394: INFO: data_ingestion: Starting preprocessing of 1000 rows...]
+[2025-07-04 11:14:46,395: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:14:46,403: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 11:14:46,403: INFO: data_ingestion: Data shape after feature engineering: (1000, 12)]
+[2025-07-04 11:14:46,416: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  oldbalanceDest  isFraud  MoneySpentSender  MoneyReceiver  type_CASH_IN  type_CASH_OUT  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00       452419.57        0        -330218.42      330218.42             1              0           0             0              0
+1    15    11647.08       30370.00            0.00        0          11647.08           0.00             0              0           0             1              0
+2    10   152264.21      106589.00       201303.01        0        -152264.21      152264.21             1              0           0             0              0
+3   403  1551760.63           0.00      3198359.45        0              0.00    -1551760.63             0              0           0             0              1
+4   206    78172.30     2921331.58       415821.90        0         -78172.30       78172.30             1              0           0             0              0]
+[2025-07-04 11:14:46,417: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 11:14:46,417: INFO: data_ingestion: Data shape after encoding: (1000, 12)]
+[2025-07-04 11:14:46,418: INFO: data_ingestion: Data shape after removing NaN: (1000, 12)]
+[2025-07-04 11:14:46,419: INFO: data_ingestion: X shape (features): (1000, 11)]
+[2025-07-04 11:14:46,419: INFO: data_ingestion: y shape (target): (1000,)]
+[2025-07-04 11:14:46,420: INFO: data_ingestion: Target variable shape: (1000,)]
+[2025-07-04 11:14:46,420: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-04 11:14:46,421: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.996
+1    0.004
+Name: proportion, dtype: float64]
+[2025-07-04 11:14:46,423: INFO: data_ingestion: Final feature matrix shape: (1000, 11)]
+[2025-07-04 11:14:46,423: INFO: data_ingestion: Final target vector shape: (1000,)]
+[2025-07-04 11:14:46,424: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.996
+1    0.004
+Name: proportion, dtype: float64]
+[2025-07-04 11:14:46,425: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-04 11:14:46,430: ERROR: main: Expected n_neighbors <= n_samples_fit, but n_neighbors = 6, n_samples_fit = 4, n_samples = 4]
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\preprocess_data.py", line 15, in main
+    X_train, X_test, y_train, y_test,_,_ = data_ingestion.data_ingestion_pipeline()
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 52, in data_ingestion_pipeline
+    X, y, df_processed = self.preprocess_data(df)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\data_ingestion.py", line 118, in preprocess_data
+    X_res, y_res = smote.fit_resample(X, y)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\base.py", line 202, in fit_resample
+    return super().fit_resample(X, y, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\base.py", line 105, in fit_resample
+    output = self._fit_resample(X, y, **params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\imblearn\over_sampling\_smote\base.py", line 359, in _fit_resample
+    nns = self.nn_k_.kneighbors(X_class, return_distance=False)[:, 1:]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\sklearn\neighbors\_base.py", line 853, in kneighbors
+    raise ValueError(
+ValueError: Expected n_neighbors <= n_samples_fit, but n_neighbors = 6, n_samples_fit = 4, n_samples = 4
+[2025-07-04 11:25:07,431: INFO: main: Starting the fraud detection application...]
+[2025-07-04 11:25:07,431: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 11:25:07,432: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-04 11:25:07,434: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-04 11:25:07,436: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-04 11:25:07,437: INFO: common: created directory at: artifacts]
+[2025-07-04 11:25:07,438: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-04 11:25:07,438: INFO: common: created directory at: artifacts/data_version]
+[2025-07-04 11:25:07,438: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-04 11:25:07,438: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-04 11:25:07,647: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-04 11:25:07,648: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:25:07,648: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-04 11:25:07,648: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 11:25:07,697: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 11:25:07,698: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-04 11:25:07,716: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  oldbalanceDest  isFraud  ...  type_CASH_IN  type_CASH_OUT  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00       452419.57        0  ...             1              0           0             0              0
+1    15    11647.08       30370.00            0.00        0  ...             0              0           0             1              0
+2    10   152264.21      106589.00       201303.01        0  ...             1              0           0             0              0
+3   403  1551760.63           0.00      3198359.45        0  ...             0              0           0             0              1
+4   206    78172.30     2921331.58       415821.90        0  ...             1              0           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-04 11:25:07,717: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 11:25:07,717: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-04 11:25:07,726: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-04 11:25:07,729: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-04 11:25:07,729: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-04 11:25:07,729: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-04 11:25:07,730: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-04 11:25:07,734: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-04 11:25:07,736: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-04 11:25:07,737: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-04 11:25:07,739: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-04 11:25:07,740: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-04 11:25:07,810: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-04 11:25:07,812: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-04 11:25:09,063: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250704T112507.csv]
+[2025-07-04 11:25:09,063: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250704T112507.csv]
+[2025-07-04 11:25:09,063: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-04 11:25:09,101: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-04 11:25:09,101: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-04 11:25:09,101: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-04 11:25:09,104: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-04 11:25:09,110: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2025-07-04 13:29:51,513: INFO: main: Starting the fraud detection application...]
+[2025-07-04 13:29:51,513: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 13:29:51,513: ERROR: main: ModelPreparationPipeline.__init__() missing 1 required positional argument: 'mlflow_config']
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 10, in <module>
+    data_ingestion = ModelPreparationPipeline()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ModelPreparationPipeline.__init__() missing 1 required positional argument: 'mlflow_config'
+[2025-07-04 13:30:09,292: INFO: main: Starting the fraud detection application...]
+[2025-07-04 13:30:09,292: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 13:30:09,293: ERROR: main: ModelPreparationPipeline.main() missing 2 required positional arguments: 'X_train' and 'X_test']
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 11, in <module>
+    data_ingestion.main()
+TypeError: ModelPreparationPipeline.main() missing 2 required positional arguments: 'X_train' and 'X_test'
+[2025-07-04 13:31:23,682: INFO: main: Starting the fraud detection application...]
+[2025-07-04 13:31:23,682: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 13:31:23,683: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-04 13:31:23,697: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-04 13:31:23,710: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-07-04 13:31:23,710: INFO: common: created directory at: artifacts]
+[2025-07-04 13:31:23,711: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-04 13:31:23,711: INFO: common: created directory at: artifacts/data_version]
+[2025-07-04 13:31:23,712: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-04 13:31:23,712: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-04 13:31:23,973: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-04 13:31:23,974: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 13:31:23,974: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-04 13:31:23,974: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-04 13:31:24,026: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 13:31:24,026: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-04 13:31:24,040: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  oldbalanceDest  isFraud  MoneySpentSender  MoneyReceiver  type_CASH_IN  type_CASH_OUT  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00       452419.57        0        -330218.42      330218.42             1              0           0             0              0
+1    15    11647.08       30370.00            0.00        0          11647.08           0.00             0              0           0             1              0
+2    10   152264.21      106589.00       201303.01        0        -152264.21      152264.21             1              0           0             0              0
+3   403  1551760.63           0.00      3198359.45        0              0.00    -1551760.63             0              0           0             0              1
+4   206    78172.30     2921331.58       415821.90        0         -78172.30       78172.30             1              0           0             0              0]
+[2025-07-04 13:31:24,040: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-04 13:31:24,041: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-04 13:31:24,050: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-04 13:31:24,053: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-04 13:31:24,054: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-04 13:31:24,054: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-04 13:31:24,055: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-04 13:31:24,058: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-04 13:31:24,060: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-04 13:31:24,060: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-04 13:31:24,062: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-04 13:31:24,062: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-04 13:31:24,138: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-04 13:31:24,140: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-04 13:31:25,555: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250704T133123.csv]
+[2025-07-04 13:31:25,555: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250704T133123.csv]
+[2025-07-04 13:31:25,555: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-04 13:31:25,608: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-04 13:31:25,608: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-04 13:31:25,609: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-04 13:31:25,611: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-04 13:31:25,617: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2025-07-04 13:31:25,618: INFO: main: Starting the fraud detection application...]
+[2025-07-04 13:31:25,618: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-04 13:31:25,619: ERROR: main: ModelPreparationPipeline.main() missing 2 required positional arguments: 'X_train' and 'X_test']
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\main.py", line 24, in <module>
+    model_prepare.main()
+TypeError: ModelPreparationPipeline.main() missing 2 required positional arguments: 'X_train' and 'X_test'

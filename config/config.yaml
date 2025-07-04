@@ -1,0 +1,23 @@
+artifacts_root: artifacts
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  data_version_dir: artifacts/data_version
+  local_data_file: artifacts/data_ingestion/input_raw.csv
+  test_size: 0.2
+  random_state: 42
+  bucket_name: databucket231
+
+prepare_base_model:
+  model_version_dir: artifacts/model_version
+  data_version_dir: artifacts/data_version
+  objective: binary:logistic
+  max_depth: 6
+  n_estimators: 300
+  random_state: 42
+  learning_rate: 0.1
+  scale_pos_weight: 10
+  n_jobs: -1
+
+training:
+  model_version_dir: artifacts/model_version
+  data_version_dir: artifacts/data_version
