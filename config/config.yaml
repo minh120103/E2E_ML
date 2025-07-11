@@ -21,3 +21,20 @@ prepare_base_model:
 training:
   model_version_dir: artifacts/model_version
   data_version_dir: artifacts/data_version
+
+evaluation:
+  model_version_dir: artifacts/model_version
+  data_version_dir: artifacts/data_version
+  evaluation_dir: artifacts/evaluation
+
+mlflow_config:
+  dagshub_username: minh120103
+  dagshub_repo_name: E2E_ML
+  tracking_uri: https://dagshub.com/minh120103/E2E_ML.mlflow
+  experiment_name: Fraud_Detection_Experiment
+
+cloud_storage_push:
+  root_dir: artifacts
+  bucket_name: databucket231
+  data_version_dir: artifacts/data_version  
+  evaluation_dir: artifacts/evaluation 

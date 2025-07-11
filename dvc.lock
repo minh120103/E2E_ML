@@ -1,0 +1,54 @@
+schema: '2.0'
+stages:
+  training_pipeline:
+    cmd: python main.py
+    deps:
+    - path: artifacts/data_ingestion/input_raw.csv
+      hash: md5
+      md5: 469de6970a4cc93d72ce0868441df7d5
+      size: 7845403
+    - path: config/config.yaml
+      hash: md5
+      md5: cac7bbfbbe7ce260e628e71d3cf94b68
+      size: 1110
+    - path: main.py
+      hash: md5
+      md5: 27f9dcbfa40ce48b9069f9dcbb462a37
+      size: 3588
+    - path: src/fraud_detection/components/
+      hash: md5
+      md5: 7d5d074702d180a367af07042d36d08b.dir
+      size: 70263
+      nfiles: 10
+    - path: src/fraud_detection/pipelines/cloud_storage_push.py
+      hash: md5
+      md5: 2f5fd89fd57113f14b270ddf711ef307
+      size: 682
+    - path: src/fraud_detection/pipelines/prepare_model.py
+      hash: md5
+      md5: 75488415db317a198a26395b2f65e24a
+      size: 2210
+    - path: src/fraud_detection/pipelines/preprocess_data.py
+      hash: md5
+      md5: afc82e92a417620e3443072d3e2dffc3
+      size: 1074
+    - path: src/fraud_detection/pipelines/train_evaluation.py
+      hash: md5
+      md5: 44b2112b407ded1fe83ce114c5be5538
+      size: 1703
+    outs:
+    - path: artifacts/data_version/
+      hash: md5
+      md5: 6ebe6953f0f04d3a31c56cbc62ca3dfd.dir
+      size: 22500322
+      nfiles: 3
+    - path: artifacts/evaluation/
+      hash: md5
+      md5: 0ec464d43d60ab942cc1d718b988a225.dir
+      size: 69917
+      nfiles: 4
+    - path: artifacts/model_version/
+      hash: md5
+      md5: 6793bea9bf58d7c850bae16eeef80176.dir
+      size: 756121
+      nfiles: 3

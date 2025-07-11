@@ -15,7 +15,7 @@ class DataPreparationPipeline:
         X_train, X_test, y_train, y_test,_,_ = data_ingestion.data_ingestion_pipeline()
         
         logger.info(f">>> Stage {STAGE_NAME} completed <<<")
-        return X_train, X_test, y_train, y_test,_,_ 
+        return X_train, X_test, y_train, y_test
 
 if __name__ == '__main__':
     try:

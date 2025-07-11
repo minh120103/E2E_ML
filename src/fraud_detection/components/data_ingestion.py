@@ -30,27 +30,35 @@ class DataIngestion:
             logger.error(f"Error while loading data: {e}")
             raise
 
-    def save_data(self, df, df_processed):
+    def save_data(self, df, df_processed, df_featured):
             input_data_versioned_name = f"input_raw_data_version_{self.datetime_suffix}.csv"
             processed_data_versioned_name = f"processed_data_version_{self.datetime_suffix}.csv"
+            df_featured_data_versioned_name = f"featured_data_version_{self.datetime_suffix}.csv"
             input_data_versioned_path = Path(self.config.data_version_dir) / input_data_versioned_name
-            processed_data_versioned_name = Path(self.config.data_version_dir) / processed_data_versioned_name
+            processed_data_versioned_path = Path(self.config.data_version_dir) / processed_data_versioned_name
+            df_featured_data_versioned_path = Path(self.config.data_version_dir) / df_featured_data_versioned_name
             if not input_data_versioned_path.exists():
                 df.to_csv(input_data_versioned_path, index=False)
-            if not processed_data_versioned_name.exists():
-                df_processed.to_csv(processed_data_versioned_name, index=False)
+            
+            if not processed_data_versioned_path.exists():
+                df_processed.to_csv(processed_data_versioned_path, index=False)            
+                
+            if not df_featured_data_versioned_path.exists():
+                df_featured.to_csv(df_featured_data_versioned_path, index=False)            
+            
                 logger.info(f"Created versioned input data file: {input_data_versioned_path}")
-                logger.info(f"Created versioned processed data file: {processed_data_versioned_name}")
+                logger.info(f"Created versioned processed data file: {processed_data_versioned_path}")
+                logger.info(f"Created versioned feature engineered data file: {df_featured_data_versioned_path}")
             else:
-                logger.info(f"Versioned file already exists: {input_data_versioned_path}, skipping save.")
+                logger.info(f"Versioned feature engineered data file already exists: {df_featured_data_versioned_path}, skipping save.")
                 logger.info("Continuing with local processing...")
 
     def data_ingestion_pipeline(self):
         """Main method to perform data ingestion."""
         logger.info("Initiating data ingestion")
         df = self.load_data()
-        X, y, df_processed = self.preprocess_data(df)
-        self.save_data(df, df_processed)
+        X, y, df_processed, df_featured = self.preprocess_data(df)
+        self.save_data(df, df_processed, df_featured)
         X_train, X_test, y_train, y_test = self.split_data(X, y)
         
         logger.info("Data ingestion completed successfully")
@@ -70,15 +78,15 @@ class DataIngestion:
         logger.info(f"Starting preprocessing of {len(df_clean)} rows...")
         logger.info(f"Initial columns: {list(df_clean.columns)}")
         
-        df_processed = self.process_data_for_churn(df_clean)
-        logger.info(f"After feature engineering columns: {list(df_processed.columns)}")
-        logger.info(f"Data shape after feature engineering: {df_processed.shape}")
-        logger.info(f"First few rows of feature engineered data: \n{df_processed.head()}")
-        
-        logger.info(f"After encoding columns: {list(df_processed.columns)}")
-        logger.info(f"Data shape after encoding: {df_processed.shape}")
-        
-        df_processed = df_processed.dropna()
+        df_featured = self.process_data_for_churn(df_clean)
+        logger.info(f"After feature engineering columns: {list(df_featured.columns)}")
+        logger.info(f"Data shape after feature engineering: {df_featured.shape}")
+        logger.info(f"First few rows of feature engineered data: \n{df_featured.head()}")
+
+        logger.info(f"After encoding columns: {list(df_featured.columns)}")
+        logger.info(f"Data shape after encoding: {df_featured.shape}")
+
+        df_processed = df_featured.dropna()
         logger.info(f"Data shape after removing NaN: {df_processed.shape}")
 
         if "isFraud" not in df_processed.columns:
@@ -121,7 +129,7 @@ class DataIngestion:
         else:
             logger.info("Target variable is balanced. Skipping SMOTE.")
             X_res, y_res = X, y
-        return X_res, y_res, df_processed
+        return X_res, y_res, df_processed, df_featured
 
     def process_data_for_churn(self,df_input):
         df_input['MoneySpentSender'] = df_input['oldbalanceOrg'] - df_input['newbalanceOrig']

@@ -173,3 +173,13 @@ cython_debug/
 .pypirc
 
 .ipynb
+
+main_temp.py
+fraud_detection.ipynb
+setup.py
+template.py
+research/
+temp_data.csv
+data.csv
+example.csv
+/templates

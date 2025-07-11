@@ -1,5 +1,6 @@
 import os
 import matplotlib
+import mlflow.sklearn
 matplotlib.use('Agg')  # Set non-interactive backend before importing pyplot
 import matplotlib.pyplot as plt
 import joblib as jb
@@ -13,8 +14,9 @@ from sklearn.metrics import (
     confusion_matrix, classification_report, roc_curve, auc,precision_recall_curve, average_precision_score,matthews_corrcoef
 )
 from pathlib import Path
-# import mlflow
-# from mlflow import register_model
+import mlflow
+import mlflow.xgboost
+from mlflow import register_model
 
 from src.fraud_detection import logger
 from src.fraud_detection.entity.config_entity import TrainingConfig, EvaluationConfig
@@ -23,22 +25,26 @@ from src.fraud_detection.utils.common import save_json
 class TrainAndEvaluateModel:
     def __init__(self, config_train: TrainingConfig, config_eval: EvaluationConfig = None):
         self.train_config = config_train
-        # self.eval_config = config_eval
+        self.eval_config = config_eval
         self.datetime_suffix = datetime.now().strftime('%Y%m%dT%H%M%S')
-        self.model_name = f"model_churn_{self.datetime_suffix}"
-        self.fine_tuned_model_name = f"finetuned_churn_{self.datetime_suffix}"
-    # def log_model_to_mlflow(self, model_name: str):
-    #     logger.info(f"Logging model to MLflow as {model_name}")
-    #     try:
-    #         run_id = mlflow.active_run().info.run_id
-    #         artifact_uri = f"runs:/{run_id}/{model_name}"
-    #         registered_model_name = "RandomForestClassifier"
-    #         mlflow.register_model(model_uri=artifact_uri, name=registered_model_name)
+        self.model_name = f"model_fraud_{self.datetime_suffix}"
+        self.fine_tuned_model_name = f"finetuned_fraud_{self.datetime_suffix}"
 
-    #         logger.info(f"Successfully registered model under unique name: {registered_model_name}")
-    #     except Exception as e:
-    #         logger.warning(f"Failed to log or register model to MLflow: {e}")
-    #         logger.warning("Continuing without MLflow model registration")
+    def log_model_to_mlflow(self,model,model_name: str):
+        logger.info(f"Logging model to MLflow as {model_name}")
+        try:
+            mlflow.xgboost.log_model(model, artifact_path=model_name)
+            run_id = mlflow.active_run().info.run_id
+            artifact_uri = f"runs:/{run_id}/{model_name}"
+            registered_model_name = "XGBoost"
+            mlflow.register_model(model_uri=artifact_uri, name=registered_model_name)
+
+            logger.info(f"Successfully registered model under unique name: {registered_model_name}")
+            # logger.info(f"Successfully logged model '{model_name}' to MLflow run '{run_id}'.")
+
+        except Exception as e:
+            logger.warning(f"Failed to log or register model to MLflow: {e}")
+            logger.warning("Continuing without MLflow model registration")
         
     def train(self, X_train_scaled, y_train, model):
         """Train the model."""
@@ -60,19 +66,18 @@ class TrainAndEvaluateModel:
         """Fine-tune the exact trained model with hyperparameter search."""
         logger.info("Starting fine-tuning of the trained model")
         
-        rf_params = {
-            'n_estimators': [100, 200, 300, 400, 500, 700, 1000],  
-            'criterion': ['gini', 'entropy', 'log_loss'],          # log_loss for classification since sklearn 1.1+
-            'max_depth': [None, 10, 20, 30, 50, 70],                # Include deeper trees
-            'min_samples_split': [2, 5, 10, 15],                    # More control over overfitting
-            'min_samples_leaf': [1, 2, 4, 6],                       # Helps with generalization
-            'max_features': ['sqrt', 'log2', None],                # 'auto' is deprecated; None = all features
-            'bootstrap': [True, False],                             # Evaluate both bootstrapped and full datasets
-            'class_weight': [None, 'balanced', 'balanced_subsample']  # Handles imbalanced datasets
-        }
+        xgb_params ={
+                    'n_estimators': [100, 200, 300, 400, 500, 700, 1000],
+                    'max_depth': [3, 6, 10, 15, 20],                        # XGBoost typically uses smaller depths than RF
+                    'learning_rate': [0.01, 0.05, 0.1, 0.15, 0.2, 0.3],    # Common learning rates for XGBoost
+                    'scale_pos_weight': [1, 2, 3, 5, 10],                   # For handling class imbalance (equivalent to class_weight)
+                    'random_state': [42],                                    # Fixed for reproducibility
+                    'n_jobs': [-1],                                          # Use all available cores
+                    'objective': ['binary:logistic']                         # For binary classification (fraud detection)
+                    }
 
-        logger.info(f"Fine-tuning model with current parameters: n_estimators={trained_model.n_estimators}, criterion={trained_model.criterion}")
-        random_search = RandomizedSearchCV(trained_model, rf_params, cv=5, n_jobs=1, n_iter=20, random_state=42)
+        logger.info(f"Fine-tuning model with current parameters: n_estimators={trained_model.n_estimators}")
+        random_search = RandomizedSearchCV(trained_model, xgb_params, cv=5, n_jobs=1, n_iter=20, random_state=42)
         random_search.fit(X_train_scaled, y_train)
         
         best_model = XGBClassifier(**random_search.best_params_, random_state=42)
@@ -126,23 +131,23 @@ class TrainAndEvaluateModel:
         logger.info(f"Detailed metrics saved to: {metrics_file_versioned}")
         
         # Log all metrics to MLflow
-        # mlflow.log_metrics({
-        #     "precision": precision,
-        #     "recall": recall,
-        #     "f1_score": f1,
-        #     "roc_auc": roc_auc,
-        #     "mcc": mcc,
-        #     "avg_precision": avg_precision
-        # })
+        mlflow.log_metrics({
+            "precision": precision,
+            "recall": recall,
+            "f1_score": f1,
+            "roc_auc": roc_auc,
+            "mcc": mcc,
+            "avg_precision": avg_precision
+        })
         
-        # # Log additional metrics from classification report
-        # for class_label, class_metrics in report.items():
-        #     if isinstance(class_metrics, dict):  # Skip 'accuracy', etc.
-        #         for metric_name, value in class_metrics.items():
-        #             if isinstance(value, (int, float)):  # Only log numeric values
-        #                 mlflow.log_metric(f"class_{class_label}_{metric_name}", value)
+        # Log additional metrics from classification report
+        for class_label, class_metrics in report.items():
+            if isinstance(class_metrics, dict):  # Skip 'accuracy', etc.
+                for metric_name, value in class_metrics.items():
+                    if isinstance(value, (int, float)):  # Only log numeric values
+                        mlflow.log_metric(f"class_{class_label}_{metric_name}", value)
         
-        # mlflow.log_artifact(str(metrics_file_versioned))
+        mlflow.log_artifact(str(metrics_file_versioned), artifact_path="metrics")
         return metrics, y_pred, y_pred_prob
     
     def plot_confusion_matrix(self, y_test, y_pred):
@@ -161,7 +166,7 @@ class TrainAndEvaluateModel:
         plt.savefig(cm_path)
         plt.close()
         logger.info(f"Confusion matrix saved to: {cm_path}")
-        # mlflow.log_artifact(cm_path)
+        mlflow.log_artifact(cm_path, artifact_path="visualizations")
 
         return cm_path
     def plot_precision_recall_curve(self, y_test, y_pred_prob):
@@ -185,7 +190,7 @@ class TrainAndEvaluateModel:
         plt.savefig(pr_path)
         plt.close()
         logger.info(f"Precision-Recall curve saved to: {pr_path}")
-        # mlflow.log_artifact(pr_path)
+        mlflow.log_artifact(pr_path, artifact_path="visualizations")
         return pr_path
     def plot_roc_curve(self, y_test, y_pred_prob):
         """Plot and save ROC curve."""
@@ -210,7 +215,7 @@ class TrainAndEvaluateModel:
         plt.savefig(roc_path)
         plt.close()
         logger.info(f"ROC curve saved to: {roc_path}")
-        # mlflow.log_artifact(roc_path)
+        mlflow.log_artifact(roc_path, artifact_path="visualizations")
 
         return roc_path
     
@@ -248,7 +253,7 @@ class TrainAndEvaluateModel:
             model, trained_model_path = self.train(X_train_scaled, y_train, base_model)
 
             accuracy = model.score(X_test_scaled, y_test)
-            # mlflow.log_metric("accuracy after testing", accuracy)
+            mlflow.log_metric("accuracy after testing", accuracy)
             logger.info(f"Model accuracy on test data: {accuracy}")
             
             if accuracy < 0.85:
@@ -262,13 +267,13 @@ class TrainAndEvaluateModel:
                 self.plot_roc_curve(y_test, y_pred_prob)
                 accuracy = fine_tuned_model.score(X_test_scaled, y_test)
                 logger.info(f"Model accuracy on test data after fine-tuned: {accuracy}")
-                # mlflow.log_metric("accuracy after fine-tuning", accuracy)
-                # self.log_model_to_mlflow(str(self.fine_tuned_model_name))
-                # mlflow.log_artifact(str(trained_model_path),"Model before tunning")    
+                mlflow.log_metric("accuracy after fine-tuning", accuracy)
+                self.log_model_to_mlflow(fine_tuned_model,str(self.fine_tuned_model_name))
+                mlflow.log_artifact(str(trained_model_path),"Model before tunning")    
                 return fine_tuned_model, metrics, fine_tuned_model_path
             else:
                 logger.info("Model accuracy is 85% or above, not needed finetuned, log trained model to mlflow")
-                # self.log_model_to_mlflow(str(self.model_name))
+                self.log_model_to_mlflow(model,str(self.model_name))
                 metrics, y_pred, y_pred_prob = self.perform_detailed_evaluation(model, X_test_scaled, y_test)
                 
                 self.plot_confusion_matrix(y_test, y_pred)

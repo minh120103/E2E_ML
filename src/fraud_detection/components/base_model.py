@@ -6,7 +6,7 @@ import pandas as pd
 from datetime import datetime
 from src.fraud_detection import logger
 from src.fraud_detection.entity.config_entity import PrepareBaseModelConfig
-# import mlflow
+import mlflow
 
 class PrepareBaseModel:
     def __init__(self, config: PrepareBaseModelConfig):
@@ -23,7 +23,7 @@ class PrepareBaseModel:
             max_depth=self.config.max_depth,
             learning_rate=self.config.learning_rate,
             scale_pos_weight=self.config.scale_pos_weight,
-            objective=self.config.criterion,
+            objective=self.config.objective,
             n_jobs=self.config.n_jobs,
         )
         logger.info(f"Model params:{self.config.n_estimators}, {self.config.random_state}, {self.config.learning_rate}, {self.config.max_depth}, {self.config.scale_pos_weight}, {self.config.n_jobs}")
@@ -60,7 +60,7 @@ class PrepareBaseModel:
         base_model_path = os.path.join(self.config.model_version_dir, f"base_model_churn_{self.datetime_suffix}.pkl")
         jb.dump(model, base_model_path)
         logger.info(f"Base model saved: {base_model_path}")
-        # mlflow.log_artifact(str(scaler_path))
-        # mlflow.log_artifact(str(base_model_path))
+        mlflow.log_artifact(str(scaler_path), artifact_path="scaler")
+        mlflow.log_artifact(str(base_model_path), artifact_path="base_model")
         return model, base_model_path, scaler_path, X_train_scaled, X_test_scaled
         

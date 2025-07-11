@@ -1,0 +1,16 @@
+stages:
+  training_pipeline:
+    cmd: python test_pipeline.py
+    deps:
+      - main.py
+      - src/fraud_detection/pipelines/preprocess_data.py
+      - src/fraud_detection/pipelines/prepare_model.py
+      - src/fraud_detection/pipelines/train_evaluation.py
+      - src/fraud_detection/pipelines/cloud_storage_push.py
+      - src/fraud_detection/components/
+      - config/config.yaml
+      - artifacts/data_ingestion/input_raw.csv
+    outs:
+      - artifacts/data_version/
+      - artifacts/model_version/
+      - artifacts/evaluation/
