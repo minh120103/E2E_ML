@@ -82,17 +82,18 @@ pip install -r requirements.txt
 3. **Set up environment variables**
 Create a `.env` file with the following:
 ```env
-MLFLOW_TRACKING_URI=https://dagshub.com/your-username/fraud-detection-ml.mlflow
+MLFLOW_TRACKING_URI=your-tracking-url
 MLFLOW_TRACKING_USERNAME=your-username
 MLFLOW_TRACKING_PASSWORD=your-token
 AWS_ACCESS_KEY_ID=your-access-key
 AWS_SECRET_ACCESS_KEY=your-secret-key
-AWS_DEFAULT_REGION=us-east-1
+AWS_DEFAULT_REGION=your-aws-service-region
 ```
 
 4. **Configure the project**
 Update `config.yaml` with your specific settings.
 
+**Make sure that you install the MLFlow version that works with your python version,**
 ## 📊 Usage
 
 ### Starting the API Server
