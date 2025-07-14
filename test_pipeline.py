@@ -4,7 +4,7 @@ from src.fraud_detection.pipelines.preprocess_data import DataPreparationPipelin
 from src.fraud_detection.pipelines.prepare_model import ModelPreparationPipeline
 from src.fraud_detection.pipelines.train_evaluation import TrainEvaluationPipeline
 from src.fraud_detection.pipelines.cloud_storage_push import CloudStoragePushPipeline
-from fraud_detection.pipelines.clean_up import cleanup_temp_files
+from src.fraud_detection.pipelines.clean_up import cleanup_temp_files
 import mlflow
 import dagshub
 from datetime import datetime

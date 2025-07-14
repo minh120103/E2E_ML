@@ -93,7 +93,7 @@ AWS_DEFAULT_REGION=your-aws-service-region
 4. **Configure the project**
 Update `config.yaml` with your specific settings.
 
-**Make sure that you install the MLFlow version that works with your python version,**
+**Ensure that the installed MLflow version is compatible with your Python version.**
 ## 📊 Usage
 
 ### Starting the API Server

@@ -4788,3 +4788,1278 @@ x====================x]
 [2025-07-11 10:25:03,827: INFO: predict_compo: Cleanup: Deleted input file artifacts\data_ingestion\input_raw.csv]
 [2025-07-11 10:25:03,887: INFO: main: 1 change detected]
 [2025-07-11 10:25:11,371: INFO: main: 1 change detected]
+[2025-07-14 09:41:21,238: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:41:21,240: INFO: common: created directory at: artifacts]
+[2025-07-14 09:41:21,240: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 09:41:21,240: INFO: training_pipeline: MLflow configured with experiment: Fraud_Detection_Experiment]
+[2025-07-14 09:41:26,297: WARNING: training_pipeline: MLflow configuration failed: [Errno 11002] getaddrinfo failed. Continuing without MLflow tracking.]
+[2025-07-14 09:41:26,298: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 09:41:26,299: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:41:26,299: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 09:41:26,299: INFO: training_pipeline: Data file not found or empty: artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 09:41:26,300: INFO: training_pipeline: ==================================================]
+[2025-07-14 09:41:26,300: INFO: training_pipeline: STAGE 0: Data Import]
+[2025-07-14 09:41:26,300: INFO: training_pipeline: ==================================================]
+[2025-07-14 09:41:26,304: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:41:26,305: INFO: common: created directory at: artifacts]
+[2025-07-14 09:41:26,305: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 09:41:26,306: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:41:26,306: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 09:41:26,390: INFO: main: 1 change detected]
+[2025-07-14 09:41:26,503: INFO: training_pipeline: Data import completed successfully]
+[2025-07-14 09:41:26,504: INFO: training_pipeline: >>>>>> stage Data Ingestion started <<<<<<]
+[2025-07-14 09:41:26,504: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-14 09:41:26,508: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:41:26,509: INFO: common: created directory at: artifacts]
+[2025-07-14 09:41:26,509: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 09:41:26,510: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:41:26,510: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 09:41:26,510: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-14 09:41:26,511: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 09:41:26,677: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-14 09:41:26,678: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:41:26,679: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-14 09:41:26,679: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:41:26,730: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:41:26,731: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-14 09:41:26,747: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  ...  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00  ...           0             0              0
+1    15    11647.08       30370.00  ...           0             1              0
+2    10   152264.21      106589.00  ...           0             0              0
+3   403  1551760.63           0.00  ...           0             0              1
+4   206    78172.30     2921331.58  ...           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-14 09:41:26,748: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:41:26,748: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-14 09:41:26,749: INFO: main: 1 change detected]
+[2025-07-14 09:41:26,756: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-14 09:41:26,759: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-14 09:41:26,759: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-14 09:41:26,760: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-14 09:41:26,760: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-14 09:41:26,763: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:41:26,765: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-14 09:41:26,765: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-14 09:41:26,767: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:41:26,768: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-14 09:41:26,833: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-14 09:41:26,835: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-14 09:41:27,115: INFO: main: 1 change detected]
+[2025-07-14 09:41:27,478: INFO: main: 1 change detected]
+[2025-07-14 09:41:27,844: INFO: main: 3 changes detected]
+[2025-07-14 09:41:28,207: INFO: main: 3 changes detected]
+[2025-07-14 09:41:28,522: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250714T094126.csv]
+[2025-07-14 09:41:28,522: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250714T094126.csv]
+[2025-07-14 09:41:28,523: INFO: data_ingestion: Created versioned feature engineered data file: artifacts\data_version\featured_data_version_20250714T094126.csv]
+[2025-07-14 09:41:28,523: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-14 09:41:28,560: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-14 09:41:28,560: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-14 09:41:28,561: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-14 09:41:28,563: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-14 09:41:28,567: INFO: training_pipeline: >>>>>> stage Data Ingestion completed <<<<<<
+
+x====================x]
+[2025-07-14 09:41:28,568: INFO: training_pipeline: >>>>>> stage Model Training Pipeline started <<<<<<]
+[2025-07-14 09:41:28,569: INFO: main: 1 change detected]
+[2025-07-14 09:41:28,572: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:41:28,573: INFO: common: created directory at: artifacts]
+[2025-07-14 09:41:28,573: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 09:41:28,588: ERROR: training_pipeline: [Errno 11002] getaddrinfo failed]
+Traceback (most recent call last):
+  File "D:\Miniconda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\Miniconda\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\Miniconda\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\Miniconda\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "D:\Miniconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\Miniconda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11002] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\training_pipeline.py", line 87, in run
+    dagshub.init(repo_owner=mlflow_config.dagshub_username, repo_name=mlflow_config.dagshub_repo_name, mlflow=True)
+  File "D:\Miniconda\Lib\site-packages\dagshub\common\init.py", line 86, in init
+    repo_api = RepoAPI(f"{repo_owner}/{repo_name}", host=host)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\common\api\repo.py", line 78, in __init__
+    self.auth = dagshub.auth.get_authenticator(host=host)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\auth\tokens.py", line 374, in get_authenticator
+    return _get_token_storage(**kwargs).get_authenticator(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\auth\tokens.py", line 122, in get_authenticator
+    token = self.get_token_object(host, fail_if_no_token, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\auth\tokens.py", line 165, in get_token_object
+    user = TokenStorage.get_username_of_token(token, host)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\auth\tokens.py", line 239, in get_username_of_token
+    resp = http_request("GET", check_url, auth=auth)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\dagshub\common\helpers.py", line 60, in http_request
+    return httpx.request(method, url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_api.py", line 109, in request
+    return client.request(
+           ^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "D:\Miniconda\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\Miniconda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11002] getaddrinfo failed
+[2025-07-14 09:41:28,742: ERROR: training: Workflow failed with unexpected error: [Errno 11002] getaddrinfo failed]
+[2025-07-14 09:41:28,931: INFO: main: 1 change detected]
+[2025-07-14 09:41:29,341: INFO: main: 1 change detected]
+[2025-07-14 09:41:29,748: INFO: main: 1 change detected]
+[2025-07-14 09:41:30,108: INFO: main: 1 change detected]
+[2025-07-14 09:41:30,519: INFO: main: 1 change detected]
+[2025-07-14 09:41:30,928: INFO: main: 1 change detected]
+[2025-07-14 09:41:31,338: INFO: main: 1 change detected]
+[2025-07-14 09:41:31,696: INFO: main: 1 change detected]
+[2025-07-14 09:41:32,106: INFO: main: 1 change detected]
+[2025-07-14 09:41:32,514: INFO: main: 1 change detected]
+[2025-07-14 09:41:32,928: INFO: main: 1 change detected]
+[2025-07-14 09:41:33,330: INFO: main: 1 change detected]
+[2025-07-14 09:41:33,741: INFO: main: 1 change detected]
+[2025-07-14 09:41:34,143: INFO: main: 1 change detected]
+[2025-07-14 09:41:34,558: INFO: main: 1 change detected]
+[2025-07-14 09:41:34,969: INFO: main: 1 change detected]
+[2025-07-14 09:41:35,378: INFO: main: 1 change detected]
+[2025-07-14 09:41:35,783: INFO: main: 1 change detected]
+[2025-07-14 09:41:36,140: INFO: main: 1 change detected]
+[2025-07-14 09:41:36,551: INFO: main: 1 change detected]
+[2025-07-14 09:41:36,954: INFO: main: 1 change detected]
+[2025-07-14 09:41:37,318: INFO: main: 1 change detected]
+[2025-07-14 09:41:37,773: INFO: main: 1 change detected]
+[2025-07-14 09:41:38,176: INFO: main: 1 change detected]
+[2025-07-14 09:41:38,578: INFO: main: 1 change detected]
+[2025-07-14 09:41:38,988: INFO: main: 1 change detected]
+[2025-07-14 09:41:39,394: INFO: main: 1 change detected]
+[2025-07-14 09:41:39,799: INFO: main: 1 change detected]
+[2025-07-14 09:41:40,205: INFO: main: 1 change detected]
+[2025-07-14 09:41:40,609: INFO: main: 1 change detected]
+[2025-07-14 09:41:41,012: INFO: main: 1 change detected]
+[2025-07-14 09:41:41,363: INFO: main: 1 change detected]
+[2025-07-14 09:41:41,779: INFO: main: 1 change detected]
+[2025-07-14 09:41:42,181: INFO: main: 1 change detected]
+[2025-07-14 09:41:42,584: INFO: main: 1 change detected]
+[2025-07-14 09:41:42,990: INFO: main: 1 change detected]
+[2025-07-14 09:41:43,397: INFO: main: 1 change detected]
+[2025-07-14 09:41:43,805: INFO: main: 1 change detected]
+[2025-07-14 09:41:44,209: INFO: main: 1 change detected]
+[2025-07-14 09:41:44,615: INFO: main: 1 change detected]
+[2025-07-14 09:41:45,020: INFO: main: 1 change detected]
+[2025-07-14 09:41:45,429: INFO: main: 1 change detected]
+[2025-07-14 09:41:45,839: INFO: main: 1 change detected]
+[2025-07-14 09:41:46,247: INFO: main: 1 change detected]
+[2025-07-14 09:41:46,610: INFO: main: 1 change detected]
+[2025-07-14 09:41:47,019: INFO: main: 1 change detected]
+[2025-07-14 09:41:47,427: INFO: main: 1 change detected]
+[2025-07-14 09:41:47,835: INFO: main: 1 change detected]
+[2025-07-14 09:41:48,243: INFO: main: 1 change detected]
+[2025-07-14 09:41:48,651: INFO: main: 1 change detected]
+[2025-07-14 09:41:49,059: INFO: main: 1 change detected]
+[2025-07-14 09:41:49,415: INFO: main: 1 change detected]
+[2025-07-14 09:41:49,823: INFO: main: 1 change detected]
+[2025-07-14 09:41:50,228: INFO: main: 1 change detected]
+[2025-07-14 09:41:50,639: INFO: main: 1 change detected]
+[2025-07-14 09:41:51,044: INFO: main: 1 change detected]
+[2025-07-14 09:41:51,402: INFO: main: 1 change detected]
+[2025-07-14 09:41:51,866: INFO: main: 1 change detected]
+[2025-07-14 09:41:52,217: INFO: main: 1 change detected]
+[2025-07-14 09:41:52,621: INFO: main: 1 change detected]
+[2025-07-14 09:41:53,024: INFO: main: 1 change detected]
+[2025-07-14 09:41:53,404: INFO: main: 1 change detected]
+[2025-07-14 09:41:53,759: INFO: main: 1 change detected]
+[2025-07-14 09:41:54,162: INFO: main: 1 change detected]
+[2025-07-14 09:41:54,565: INFO: main: 1 change detected]
+[2025-07-14 09:44:55,780: INFO: test_pipeline: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-14 09:44:55,781: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-14 09:44:55,785: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:44:55,786: INFO: common: created directory at: artifacts]
+[2025-07-14 09:44:55,786: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 09:44:55,787: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:44:55,787: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 09:44:55,788: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-14 09:44:55,788: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 09:44:55,961: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-14 09:44:55,961: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:44:55,962: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-14 09:44:55,962: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:44:56,006: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:44:56,007: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-14 09:44:56,029: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  ...  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00  ...           0             0              0
+1    15    11647.08       30370.00  ...           0             1              0
+2    10   152264.21      106589.00  ...           0             0              0
+3   403  1551760.63           0.00  ...           0             0              1
+4   206    78172.30     2921331.58  ...           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-14 09:44:56,030: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:44:56,030: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-14 09:44:56,039: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-14 09:44:56,042: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-14 09:44:56,043: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-14 09:44:56,043: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-14 09:44:56,043: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-14 09:44:56,045: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:44:56,047: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-14 09:44:56,048: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-14 09:44:56,050: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:44:56,050: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-14 09:44:56,120: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-14 09:44:56,122: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-14 09:44:57,810: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250714T094455.csv]
+[2025-07-14 09:44:57,810: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250714T094455.csv]
+[2025-07-14 09:44:57,810: INFO: data_ingestion: Created versioned feature engineered data file: artifacts\data_version\featured_data_version_20250714T094455.csv]
+[2025-07-14 09:44:57,811: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-14 09:44:57,850: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-14 09:44:57,851: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-14 09:44:57,851: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-14 09:44:57,854: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-14 09:44:57,859: INFO: test_pipeline: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x====================x]
+[2025-07-14 09:44:57,860: INFO: test_pipeline: >>>>>> stage Model Training Pipeline started <<<<<<]
+[2025-07-14 09:44:57,864: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:44:57,864: INFO: common: created directory at: artifacts]
+[2025-07-14 09:44:57,865: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 09:44:58,274: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 09:44:58,285: INFO: helpers: Accessing as minh120103]
+[2025-07-14 09:44:58,661: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/repos/minh120103/E2E_ML "HTTP/1.1 200 OK"]
+[2025-07-14 09:44:59,038: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 09:44:59,038: INFO: helpers: Initialized MLflow to track repo "minh120103/E2E_ML"]
+[2025-07-14 09:44:59,038: INFO: helpers: Repository minh120103/E2E_ML initialized!]
+[2025-07-14 09:45:00,152: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:00,152: INFO: test_pipeline: Running Model Preparation]
+[2025-07-14 09:45:00,152: INFO: prepare_model: >>> Stage Prepare base model started <<<]
+[2025-07-14 09:45:00,167: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:45:00,167: INFO: common: created directory at: artifacts]
+[2025-07-14 09:45:00,173: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:45:00,173: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:45:00,173: INFO: configuration: Prepare base model config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'objective': 'binary:logistic', 'max_depth': 6, 'n_estimators': 300, 'random_state': 42, 'learning_rate': 0.1, 'scale_pos_weight': 10, 'n_jobs': -1}]
+[2025-07-14 09:45:00,489: INFO: base_model: Creating base model and scaler]
+[2025-07-14 09:45:00,489: INFO: base_model: Creating base XGBoost model]
+[2025-07-14 09:45:00,489: INFO: base_model: Model params:300, 42, 0.1, 6, 10, -1]
+[2025-07-14 09:45:00,489: INFO: base_model: Creating scaler from training data]
+[2025-07-14 09:45:00,572: INFO: base_model: Base model saved: artifacts\model_version\base_model_churn_20250714T094500.pkl]
+[2025-07-14 09:45:02,096: INFO: prepare_model: >>> Stage Prepare base model completed <<<]
+[2025-07-14 09:45:02,096: INFO: test_pipeline: Base model created at: artifacts\model_version\base_model_churn_20250714T094500.pkl]
+[2025-07-14 09:45:02,096: INFO: test_pipeline: Scaler created at: artifacts\model_version\scaler_churn_version_20250714T094500.pkl]
+[2025-07-14 09:45:02,096: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:02,096: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:02,096: INFO: test_pipeline: Running Model Training and Evaluation]
+[2025-07-14 09:45:02,096: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL started <<<]
+[2025-07-14 09:45:02,096: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:45:02,096: INFO: common: created directory at: artifacts]
+[2025-07-14 09:45:02,106: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:45:02,106: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:45:02,106: INFO: configuration: Training config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version'}]
+[2025-07-14 09:45:02,111: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:45:02,112: INFO: common: created directory at: artifacts]
+[2025-07-14 09:45:02,112: INFO: common: created directory at: artifacts/evaluation]
+[2025-07-14 09:45:02,112: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:45:02,112: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:45:02,113: INFO: configuration: Evaluation config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 09:45:02,113: INFO: model_training: Initiating model training and evaluation with temporary directory management]
+[2025-07-14 09:45:02,113: INFO: model_training: Loaded y_train shape: (159774,)]
+[2025-07-14 09:45:02,114: INFO: model_training: Loaded y_test shape: (39944,)]
+[2025-07-14 09:45:02,114: INFO: model_training: NaN count in y_train: 0]
+[2025-07-14 09:45:02,115: INFO: model_training: NaN count in y_test: 0]
+[2025-07-14 09:45:02,115: INFO: model_training: Final X_train_scaled shape: (159774, 11)]
+[2025-07-14 09:45:02,115: INFO: model_training: Final y_train shape: (159774,)]
+[2025-07-14 09:45:02,116: INFO: model_training: Final X_test_scaled shape: (39944, 11)]
+[2025-07-14 09:45:02,116: INFO: model_training: Final y_test shape: (39944,)]
+[2025-07-14 09:45:02,119: INFO: model_training: Loading model: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.1, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=6,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=300,
+              n_jobs=-1, num_parallel_tree=None, ...)]
+[2025-07-14 09:45:02,119: INFO: model_training: Starting model training for model_fraud_20250714T094502]
+[2025-07-14 09:45:03,163: INFO: model_training: Model training for model_fraud_20250714T094502 completed]
+[2025-07-14 09:45:03,176: INFO: model_training:   trained model file (for future use): artifacts\model_version\model_churn_version_20250714T094502.pkl]
+[2025-07-14 09:45:03,602: INFO: model_training: Model accuracy on test data: 0.9981974764670539]
+[2025-07-14 09:45:03,602: INFO: model_training: Model accuracy is 85% or above, not needed finetuned, log trained model to mlflow]
+[2025-07-14 09:45:03,603: INFO: model_training: Logging model to MLflow as model_fraud_20250714T094502]
+[2025-07-14 09:45:27,455: INFO: model_training: Successfully registered model under unique name: XGBoost]
+[2025-07-14 09:45:27,456: INFO: model_training: Performing detailed evaluation on test data]
+[2025-07-14 09:45:27,597: INFO: common: json file saved at: artifacts\evaluation\metrics_20250714T094502.json]
+[2025-07-14 09:45:27,598: INFO: model_training: Detailed metrics saved to: artifacts\evaluation\metrics_20250714T094502.json]
+[2025-07-14 09:45:40,127: INFO: model_training: Creating confusion matrix plot]
+[2025-07-14 09:45:40,423: INFO: model_training: Confusion matrix saved to: artifacts\evaluation\confusion_matrix_20250714T094502.png]
+[2025-07-14 09:45:40,870: INFO: model_training: Creating Precision-Recall curve plot]
+[2025-07-14 09:45:40,990: INFO: model_training: Precision-Recall curve saved to: artifacts\evaluation\precision_recall_curve_20250714T094502.png]
+[2025-07-14 09:45:41,980: INFO: model_training: Creating ROC curve plot]
+[2025-07-14 09:45:42,110: INFO: model_training: ROC curve saved to: artifacts\evaluation\roc_curve_20250714T094502.png]
+[2025-07-14 09:45:42,779: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL completed <<<]
+[2025-07-14 09:45:42,779: INFO: test_pipeline: Training and evaluation completed. Final model at: artifacts\model_version\model_churn_version_20250714T094502.pkl]
+[2025-07-14 09:45:42,780: INFO: test_pipeline: Logged Metrics: {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1_score': 0.9982059204624738, 'roc_auc': 0.9999928674808555, 'mcc': 0.9964010044780308, 'avg_precision': 0.9999927418432609, 'classification_report': {'0': {'precision': 0.9999496043944968, 'recall': 0.9964344900316376, 'f1-score': 0.9981889526109267, 'support': 19913.0}, '1': {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1-score': 0.9982059204624738, 'support': 20031.0}, 'accuracy': 0.9981974764670539, 'macro avg': {'precision': 0.9982087209077604, 'recall': 0.9981922837058492, 'f1-score': 0.9981974365367002, 'support': 39944.0}, 'weighted avg': {'precision': 0.9982035781015458, 'recall': 0.9981974764670539, 'f1-score': 0.998197461599369, 'support': 39944.0}}}]
+[2025-07-14 09:45:42,780: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:43,636: INFO: test_pipeline: >>>>>> stage Model Training Pipeline completed <<<<<<
+
+x====================x]
+[2025-07-14 09:45:43,636: INFO: test_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push started <<<<<<]
+[2025-07-14 09:45:43,637: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:43,637: INFO: test_pipeline: STAGE 4: Cloud Storage Push]
+[2025-07-14 09:45:43,638: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:45:43,638: INFO: cloud_storage_push: >>> Stage Cloud Storage Push started <<<]
+[2025-07-14 09:45:43,642: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:45:43,643: INFO: common: created directory at: artifacts]
+[2025-07-14 09:45:43,655: INFO: configuration: Cloud Storage Push config: {'root_dir': 'artifacts', 'bucket_name': 'databucket632', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 09:45:43,689: INFO: credentials: Found credentials in shared credentials file: ~/.aws/credentials]
+[2025-07-14 09:45:44,153: INFO: cloud_storage_push: Ensured directory structure exists for cloud storage push]
+[2025-07-14 09:45:44,154: INFO: cloud_storage_push: Starting cloud storage push process...]
+[2025-07-14 09:45:44,893: ERROR: cloud_storage_push: Bucket validation failed: An error occurred (403) when calling the HeadBucket operation: Forbidden]
+[2025-07-14 09:45:44,894: ERROR: cloud_storage_push: Bucket 'databucket632' does not exist or is not accessible]
+[2025-07-14 09:45:44,894: ERROR: cloud_storage_push: Failed to push to cloud storage: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.]
+[2025-07-14 09:45:44,895: ERROR: test_pipeline: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.]
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\test_pipeline.py", line 74, in <module>
+    cloud_push.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\cloud_storage_push.py", line 16, in main
+    cloud_storage_push.push_to_cloud_storage()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\cloud_storage_push.py", line 101, in push_to_cloud_storage
+    raise e
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\cloud_storage_push.py", line 68, in push_to_cloud_storage
+    raise Exception(
+Exception: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.
+[2025-07-14 09:50:13,510: INFO: test_pipeline: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-14 09:50:13,511: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-14 09:50:13,515: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:13,516: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:13,516: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 09:50:13,517: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:50:13,517: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 09:50:13,518: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-14 09:50:13,518: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 09:50:13,681: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-14 09:50:13,682: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:50:13,682: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-14 09:50:13,682: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 09:50:13,720: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:50:13,721: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-14 09:50:13,734: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  ...  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00  ...           0             0              0
+1    15    11647.08       30370.00  ...           0             1              0
+2    10   152264.21      106589.00  ...           0             0              0
+3   403  1551760.63           0.00  ...           0             0              1
+4   206    78172.30     2921331.58  ...           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-14 09:50:13,735: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 09:50:13,735: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-14 09:50:13,741: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-14 09:50:13,745: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-14 09:50:13,745: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-14 09:50:13,745: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-14 09:50:13,746: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-14 09:50:13,748: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:50:13,750: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-14 09:50:13,750: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-14 09:50:13,752: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 09:50:13,752: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-14 09:50:13,814: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-14 09:50:13,816: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-14 09:50:15,480: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250714T095013.csv]
+[2025-07-14 09:50:15,480: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250714T095013.csv]
+[2025-07-14 09:50:15,480: INFO: data_ingestion: Created versioned feature engineered data file: artifacts\data_version\featured_data_version_20250714T095013.csv]
+[2025-07-14 09:50:15,495: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-14 09:50:15,528: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-14 09:50:15,528: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-14 09:50:15,528: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-14 09:50:15,532: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-14 09:50:15,535: INFO: test_pipeline: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x====================x]
+[2025-07-14 09:50:15,535: INFO: test_pipeline: >>>>>> stage Model Training Pipeline started <<<<<<]
+[2025-07-14 09:50:15,540: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:15,541: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:15,541: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 09:50:15,919: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 09:50:15,919: INFO: helpers: Accessing as minh120103]
+[2025-07-14 09:50:16,285: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/repos/minh120103/E2E_ML "HTTP/1.1 200 OK"]
+[2025-07-14 09:50:16,625: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 09:50:16,628: INFO: helpers: Initialized MLflow to track repo "minh120103/E2E_ML"]
+[2025-07-14 09:50:16,629: INFO: helpers: Repository minh120103/E2E_ML initialized!]
+[2025-07-14 09:50:17,805: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:17,806: INFO: test_pipeline: Running Model Preparation]
+[2025-07-14 09:50:17,806: INFO: prepare_model: >>> Stage Prepare base model started <<<]
+[2025-07-14 09:50:17,814: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:17,815: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:17,815: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:50:17,816: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:50:17,816: INFO: configuration: Prepare base model config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'objective': 'binary:logistic', 'max_depth': 6, 'n_estimators': 300, 'random_state': 42, 'learning_rate': 0.1, 'scale_pos_weight': 10, 'n_jobs': -1}]
+[2025-07-14 09:50:18,135: INFO: base_model: Creating base model and scaler]
+[2025-07-14 09:50:18,136: INFO: base_model: Creating base XGBoost model]
+[2025-07-14 09:50:18,136: INFO: base_model: Model params:300, 42, 0.1, 6, 10, -1]
+[2025-07-14 09:50:18,137: INFO: base_model: Creating scaler from training data]
+[2025-07-14 09:50:18,211: INFO: base_model: Base model saved: artifacts\model_version\base_model_churn_20250714T095018.pkl]
+[2025-07-14 09:50:19,756: INFO: prepare_model: >>> Stage Prepare base model completed <<<]
+[2025-07-14 09:50:19,757: INFO: test_pipeline: Base model created at: artifacts\model_version\base_model_churn_20250714T095018.pkl]
+[2025-07-14 09:50:19,757: INFO: test_pipeline: Scaler created at: artifacts\model_version\scaler_churn_version_20250714T095018.pkl]
+[2025-07-14 09:50:19,757: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:19,758: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:19,758: INFO: test_pipeline: Running Model Training and Evaluation]
+[2025-07-14 09:50:19,758: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL started <<<]
+[2025-07-14 09:50:19,762: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:19,763: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:19,764: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:50:19,764: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:50:19,764: INFO: configuration: Training config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version'}]
+[2025-07-14 09:50:19,768: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:19,769: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:19,770: INFO: common: created directory at: artifacts/evaluation]
+[2025-07-14 09:50:19,770: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 09:50:19,770: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 09:50:19,771: INFO: configuration: Evaluation config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 09:50:19,771: INFO: model_training: Initiating model training and evaluation with temporary directory management]
+[2025-07-14 09:50:19,771: INFO: model_training: Loaded y_train shape: (159774,)]
+[2025-07-14 09:50:19,772: INFO: model_training: Loaded y_test shape: (39944,)]
+[2025-07-14 09:50:19,772: INFO: model_training: NaN count in y_train: 0]
+[2025-07-14 09:50:19,772: INFO: model_training: NaN count in y_test: 0]
+[2025-07-14 09:50:19,773: INFO: model_training: Final X_train_scaled shape: (159774, 11)]
+[2025-07-14 09:50:19,773: INFO: model_training: Final y_train shape: (159774,)]
+[2025-07-14 09:50:19,773: INFO: model_training: Final X_test_scaled shape: (39944, 11)]
+[2025-07-14 09:50:19,774: INFO: model_training: Final y_test shape: (39944,)]
+[2025-07-14 09:50:19,776: INFO: model_training: Loading model: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.1, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=6,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=300,
+              n_jobs=-1, num_parallel_tree=None, ...)]
+[2025-07-14 09:50:19,777: INFO: model_training: Starting model training for model_fraud_20250714T095019]
+[2025-07-14 09:50:20,678: INFO: model_training: Model training for model_fraud_20250714T095019 completed]
+[2025-07-14 09:50:20,693: INFO: model_training:   trained model file (for future use): artifacts\model_version\model_churn_version_20250714T095019.pkl]
+[2025-07-14 09:50:21,076: INFO: model_training: Model accuracy on test data: 0.9981974764670539]
+[2025-07-14 09:50:21,076: INFO: model_training: Model accuracy is 85% or above, not needed finetuned, log trained model to mlflow]
+[2025-07-14 09:50:21,076: INFO: model_training: Logging model to MLflow as model_fraud_20250714T095019]
+[2025-07-14 09:50:36,867: INFO: model_training: Successfully registered model under unique name: XGBoost]
+[2025-07-14 09:50:36,868: INFO: model_training: Performing detailed evaluation on test data]
+[2025-07-14 09:50:37,006: INFO: common: json file saved at: artifacts\evaluation\metrics_20250714T095019.json]
+[2025-07-14 09:50:37,006: INFO: model_training: Detailed metrics saved to: artifacts\evaluation\metrics_20250714T095019.json]
+[2025-07-14 09:50:49,562: INFO: model_training: Creating confusion matrix plot]
+[2025-07-14 09:50:49,666: INFO: model_training: Confusion matrix saved to: artifacts\evaluation\confusion_matrix_20250714T095019.png]
+[2025-07-14 09:50:50,196: INFO: model_training: Creating Precision-Recall curve plot]
+[2025-07-14 09:50:50,325: INFO: model_training: Precision-Recall curve saved to: artifacts\evaluation\precision_recall_curve_20250714T095019.png]
+[2025-07-14 09:50:51,290: INFO: model_training: Creating ROC curve plot]
+[2025-07-14 09:50:51,426: INFO: model_training: ROC curve saved to: artifacts\evaluation\roc_curve_20250714T095019.png]
+[2025-07-14 09:50:52,319: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL completed <<<]
+[2025-07-14 09:50:52,319: INFO: test_pipeline: Training and evaluation completed. Final model at: artifacts\model_version\model_churn_version_20250714T095019.pkl]
+[2025-07-14 09:50:52,320: INFO: test_pipeline: Logged Metrics: {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1_score': 0.9982059204624738, 'roc_auc': 0.9999928674808555, 'mcc': 0.9964010044780308, 'avg_precision': 0.9999927418432609, 'classification_report': {'0': {'precision': 0.9999496043944968, 'recall': 0.9964344900316376, 'f1-score': 0.9981889526109267, 'support': 19913.0}, '1': {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1-score': 0.9982059204624738, 'support': 20031.0}, 'accuracy': 0.9981974764670539, 'macro avg': {'precision': 0.9982087209077604, 'recall': 0.9981922837058492, 'f1-score': 0.9981974365367002, 'support': 39944.0}, 'weighted avg': {'precision': 0.9982035781015458, 'recall': 0.9981974764670539, 'f1-score': 0.998197461599369, 'support': 39944.0}}}]
+[2025-07-14 09:50:52,320: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:53,054: INFO: test_pipeline: >>>>>> stage Model Training Pipeline completed <<<<<<
+
+x====================x]
+[2025-07-14 09:50:53,054: INFO: test_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push started <<<<<<]
+[2025-07-14 09:50:53,054: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:53,054: INFO: test_pipeline: STAGE 4: Cloud Storage Push]
+[2025-07-14 09:50:53,054: INFO: test_pipeline: ==================================================]
+[2025-07-14 09:50:53,054: INFO: cloud_storage_push: >>> Stage Cloud Storage Push started <<<]
+[2025-07-14 09:50:53,070: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 09:50:53,070: INFO: common: created directory at: artifacts]
+[2025-07-14 09:50:53,075: INFO: configuration: Cloud Storage Push config: {'root_dir': 'artifacts', 'bucket_name': 'databucket632', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 09:50:53,090: INFO: credentials: Found credentials in shared credentials file: ~/.aws/credentials]
+[2025-07-14 09:50:53,306: INFO: cloud_storage_push: Ensured directory structure exists for cloud storage push]
+[2025-07-14 09:50:53,306: INFO: cloud_storage_push: Starting cloud storage push process...]
+[2025-07-14 09:50:54,001: ERROR: cloud_storage_push: Bucket validation failed: An error occurred (403) when calling the HeadBucket operation: Forbidden]
+[2025-07-14 09:50:54,001: ERROR: cloud_storage_push: Bucket 'databucket632' does not exist or is not accessible]
+[2025-07-14 09:50:54,001: ERROR: cloud_storage_push: Failed to push to cloud storage: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.]
+[2025-07-14 09:50:54,001: ERROR: test_pipeline: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.]
+Traceback (most recent call last):
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\test_pipeline.py", line 74, in <module>
+    cloud_push.main()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\pipelines\cloud_storage_push.py", line 16, in main
+    cloud_storage_push.push_to_cloud_storage()
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\cloud_storage_push.py", line 101, in push_to_cloud_storage
+    raise e
+  File "C:\Users\minh1\Desktop\Study\SFIN\New folder\src\fraud_detection\components\cloud_storage_push.py", line 68, in push_to_cloud_storage
+    raise Exception(
+Exception: S3 BUCKET SETUP REQUIRED:
+1. Create S3 bucket 'databucket632' in your AWS account.
+2. Ensure your AWS credentials are set (e.g., via environment, ~/.aws/credentials, or IAM role).
+3. Ensure the user has 's3:PutObject' permission on the bucket.
+[2025-07-14 10:03:41,193: INFO: test_pipeline: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2025-07-14 10:03:41,193: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-14 10:03:41,197: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:03:41,198: INFO: common: created directory at: artifacts]
+[2025-07-14 10:03:41,199: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:03:41,199: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:03:41,199: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:03:41,200: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-14 10:03:41,200: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 10:03:41,365: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-14 10:03:41,365: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 10:03:41,366: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-14 10:03:41,366: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 10:03:41,406: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 10:03:41,406: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-14 10:03:41,419: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  ...  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00  ...           0             0              0
+1    15    11647.08       30370.00  ...           0             1              0
+2    10   152264.21      106589.00  ...           0             0              0
+3   403  1551760.63           0.00  ...           0             0              1
+4   206    78172.30     2921331.58  ...           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-14 10:03:41,420: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 10:03:41,420: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-14 10:03:41,428: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-14 10:03:41,431: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-14 10:03:41,431: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-14 10:03:41,431: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-14 10:03:41,432: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-14 10:03:41,434: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 10:03:41,436: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-14 10:03:41,436: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-14 10:03:41,438: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 10:03:41,438: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-14 10:03:41,495: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-14 10:03:41,498: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-14 10:03:43,173: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250714T100341.csv]
+[2025-07-14 10:03:43,173: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250714T100341.csv]
+[2025-07-14 10:03:43,174: INFO: data_ingestion: Created versioned feature engineered data file: artifacts\data_version\featured_data_version_20250714T100341.csv]
+[2025-07-14 10:03:43,174: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-14 10:03:43,213: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-14 10:03:43,213: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-14 10:03:43,214: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-14 10:03:43,217: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-14 10:03:43,221: INFO: test_pipeline: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x====================x]
+[2025-07-14 10:03:43,222: INFO: test_pipeline: >>>>>> stage Model Training Pipeline started <<<<<<]
+[2025-07-14 10:03:43,226: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:03:43,227: INFO: common: created directory at: artifacts]
+[2025-07-14 10:03:43,227: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 10:03:43,633: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 10:03:43,640: INFO: helpers: Accessing as minh120103]
+[2025-07-14 10:03:44,001: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/repos/minh120103/E2E_ML "HTTP/1.1 200 OK"]
+[2025-07-14 10:03:44,358: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 10:03:44,361: INFO: helpers: Initialized MLflow to track repo "minh120103/E2E_ML"]
+[2025-07-14 10:03:44,362: INFO: helpers: Repository minh120103/E2E_ML initialized!]
+[2025-07-14 10:03:45,390: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:03:45,390: INFO: test_pipeline: Running Model Preparation]
+[2025-07-14 10:03:45,390: INFO: prepare_model: >>> Stage Prepare base model started <<<]
+[2025-07-14 10:03:45,390: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:03:45,390: INFO: common: created directory at: artifacts]
+[2025-07-14 10:03:45,406: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:03:45,406: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:03:45,407: INFO: configuration: Prepare base model config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'objective': 'binary:logistic', 'max_depth': 6, 'n_estimators': 300, 'random_state': 42, 'learning_rate': 0.1, 'scale_pos_weight': 10, 'n_jobs': -1}]
+[2025-07-14 10:03:45,721: INFO: base_model: Creating base model and scaler]
+[2025-07-14 10:03:45,721: INFO: base_model: Creating base XGBoost model]
+[2025-07-14 10:03:45,721: INFO: base_model: Model params:300, 42, 0.1, 6, 10, -1]
+[2025-07-14 10:03:45,721: INFO: base_model: Creating scaler from training data]
+[2025-07-14 10:03:45,817: INFO: base_model: Base model saved: artifacts\model_version\base_model_churn_20250714T100345.pkl]
+[2025-07-14 10:03:47,146: INFO: prepare_model: >>> Stage Prepare base model completed <<<]
+[2025-07-14 10:03:47,146: INFO: test_pipeline: Base model created at: artifacts\model_version\base_model_churn_20250714T100345.pkl]
+[2025-07-14 10:03:47,147: INFO: test_pipeline: Scaler created at: artifacts\model_version\scaler_churn_version_20250714T100345.pkl]
+[2025-07-14 10:03:47,147: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:03:47,147: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:03:47,147: INFO: test_pipeline: Running Model Training and Evaluation]
+[2025-07-14 10:03:47,148: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL started <<<]
+[2025-07-14 10:03:47,152: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:03:47,152: INFO: common: created directory at: artifacts]
+[2025-07-14 10:03:47,153: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:03:47,153: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:03:47,154: INFO: configuration: Training config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version'}]
+[2025-07-14 10:03:47,158: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:03:47,158: INFO: common: created directory at: artifacts]
+[2025-07-14 10:03:47,159: INFO: common: created directory at: artifacts/evaluation]
+[2025-07-14 10:03:47,159: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:03:47,159: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:03:47,160: INFO: configuration: Evaluation config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 10:03:47,160: INFO: model_training: Initiating model training and evaluation with temporary directory management]
+[2025-07-14 10:03:47,160: INFO: model_training: Loaded y_train shape: (159774,)]
+[2025-07-14 10:03:47,161: INFO: model_training: Loaded y_test shape: (39944,)]
+[2025-07-14 10:03:47,161: INFO: model_training: NaN count in y_train: 0]
+[2025-07-14 10:03:47,161: INFO: model_training: NaN count in y_test: 0]
+[2025-07-14 10:03:47,162: INFO: model_training: Final X_train_scaled shape: (159774, 11)]
+[2025-07-14 10:03:47,162: INFO: model_training: Final y_train shape: (159774,)]
+[2025-07-14 10:03:47,162: INFO: model_training: Final X_test_scaled shape: (39944, 11)]
+[2025-07-14 10:03:47,163: INFO: model_training: Final y_test shape: (39944,)]
+[2025-07-14 10:03:47,165: INFO: model_training: Loading model: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.1, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=6,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=300,
+              n_jobs=-1, num_parallel_tree=None, ...)]
+[2025-07-14 10:03:47,166: INFO: model_training: Starting model training for model_fraud_20250714T100347]
+[2025-07-14 10:03:48,152: INFO: model_training: Model training for model_fraud_20250714T100347 completed]
+[2025-07-14 10:03:48,163: INFO: model_training:   trained model file (for future use): artifacts\model_version\model_churn_version_20250714T100347.pkl]
+[2025-07-14 10:03:48,527: INFO: model_training: Model accuracy on test data: 0.9981974764670539]
+[2025-07-14 10:03:48,527: INFO: model_training: Model accuracy is 85% or above, not needed finetuned, log trained model to mlflow]
+[2025-07-14 10:03:48,528: INFO: model_training: Logging model to MLflow as model_fraud_20250714T100347]
+[2025-07-14 10:04:03,987: INFO: model_training: Successfully registered model under unique name: XGBoost]
+[2025-07-14 10:04:03,987: INFO: model_training: Performing detailed evaluation on test data]
+[2025-07-14 10:04:04,124: INFO: common: json file saved at: artifacts\evaluation\metrics_20250714T100347.json]
+[2025-07-14 10:04:04,124: INFO: model_training: Detailed metrics saved to: artifacts\evaluation\metrics_20250714T100347.json]
+[2025-07-14 10:04:16,622: INFO: model_training: Creating confusion matrix plot]
+[2025-07-14 10:04:16,728: INFO: model_training: Confusion matrix saved to: artifacts\evaluation\confusion_matrix_20250714T100347.png]
+[2025-07-14 10:04:17,646: INFO: model_training: Creating Precision-Recall curve plot]
+[2025-07-14 10:04:17,777: INFO: model_training: Precision-Recall curve saved to: artifacts\evaluation\precision_recall_curve_20250714T100347.png]
+[2025-07-14 10:04:18,637: INFO: model_training: Creating ROC curve plot]
+[2025-07-14 10:04:18,798: INFO: model_training: ROC curve saved to: artifacts\evaluation\roc_curve_20250714T100347.png]
+[2025-07-14 10:04:19,697: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL completed <<<]
+[2025-07-14 10:04:19,697: INFO: test_pipeline: Training and evaluation completed. Final model at: artifacts\model_version\model_churn_version_20250714T100347.pkl]
+[2025-07-14 10:04:19,697: INFO: test_pipeline: Logged Metrics: {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1_score': 0.9982059204624738, 'roc_auc': 0.9999928674808555, 'mcc': 0.9964010044780308, 'avg_precision': 0.9999927418432609, 'classification_report': {'0': {'precision': 0.9999496043944968, 'recall': 0.9964344900316376, 'f1-score': 0.9981889526109267, 'support': 19913.0}, '1': {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1-score': 0.9982059204624738, 'support': 20031.0}, 'accuracy': 0.9981974764670539, 'macro avg': {'precision': 0.9982087209077604, 'recall': 0.9981922837058492, 'f1-score': 0.9981974365367002, 'support': 39944.0}, 'weighted avg': {'precision': 0.9982035781015458, 'recall': 0.9981974764670539, 'f1-score': 0.998197461599369, 'support': 39944.0}}}]
+[2025-07-14 10:04:19,698: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:04:20,490: INFO: test_pipeline: >>>>>> stage Model Training Pipeline completed <<<<<<
+
+x====================x]
+[2025-07-14 10:04:20,490: INFO: test_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push started <<<<<<]
+[2025-07-14 10:04:20,490: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:04:20,491: INFO: test_pipeline: STAGE 4: Cloud Storage Push]
+[2025-07-14 10:04:20,491: INFO: test_pipeline: ==================================================]
+[2025-07-14 10:04:20,491: INFO: cloud_storage_push: >>> Stage Cloud Storage Push started <<<]
+[2025-07-14 10:04:20,495: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:04:20,496: INFO: common: created directory at: artifacts]
+[2025-07-14 10:04:20,498: INFO: configuration: Cloud Storage Push config: {'root_dir': 'artifacts', 'bucket_name': 'databucket632', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 10:04:20,735: INFO: cloud_storage_push: Ensured directory structure exists for cloud storage push]
+[2025-07-14 10:04:20,735: INFO: cloud_storage_push: Starting cloud storage push process...]
+[2025-07-14 10:04:21,420: INFO: cloud_storage_push: Bucket 'databucket632' exists and is accessible]
+[2025-07-14 10:04:21,424: INFO: cloud_storage_push: Found 24 files to upload to cloud storage.]
+[2025-07-14 10:05:07,431: INFO: cloud_storage_push: Uploaded artifacts\data_version\featured_data_version_20250714T094126.csv to bucket databucket632.]
+[2025-07-14 10:05:10,973: INFO: cloud_storage_push: Uploaded artifacts\data_version\featured_data_version_20250714T095013.csv to bucket databucket632.]
+[2025-07-14 10:05:13,421: INFO: cloud_storage_push: Uploaded artifacts\data_version\featured_data_version_20250714T094455.csv to bucket databucket632.]
+[2025-07-14 10:05:18,685: INFO: cloud_storage_push: Uploaded artifacts\data_version\featured_data_version_20250714T100341.csv to bucket databucket632.]
+[2025-07-14 10:05:23,836: INFO: cloud_storage_push: Uploaded artifacts\data_version\input_raw_data_version_20250714T094455.csv to bucket databucket632.]
+[2025-07-14 10:05:24,743: INFO: cloud_storage_push: Uploaded artifacts\evaluation\confusion_matrix_20250714T094502.png to bucket databucket632.]
+[2025-07-14 10:05:25,214: INFO: cloud_storage_push: Uploaded artifacts\evaluation\confusion_matrix_20250714T095019.png to bucket databucket632.]
+[2025-07-14 10:05:25,869: INFO: cloud_storage_push: Uploaded artifacts\data_version\input_raw_data_version_20250714T094126.csv to bucket databucket632.]
+[2025-07-14 10:05:26,240: INFO: cloud_storage_push: Uploaded artifacts\evaluation\metrics_20250714T094502.json to bucket databucket632.]
+[2025-07-14 10:05:26,391: INFO: cloud_storage_push: Uploaded artifacts\evaluation\confusion_matrix_20250714T100347.png to bucket databucket632.]
+[2025-07-14 10:05:26,628: INFO: cloud_storage_push: Uploaded artifacts\evaluation\metrics_20250714T095019.json to bucket databucket632.]
+[2025-07-14 10:05:26,735: INFO: cloud_storage_push: Uploaded artifacts\evaluation\metrics_20250714T100347.json to bucket databucket632.]
+[2025-07-14 10:05:27,233: INFO: cloud_storage_push: Uploaded artifacts\evaluation\precision_recall_curve_20250714T095019.png to bucket databucket632.]
+[2025-07-14 10:05:27,894: INFO: cloud_storage_push: Uploaded artifacts\evaluation\precision_recall_curve_20250714T094502.png to bucket databucket632.]
+[2025-07-14 10:05:28,173: INFO: cloud_storage_push: Uploaded artifacts\evaluation\precision_recall_curve_20250714T100347.png to bucket databucket632.]
+[2025-07-14 10:05:28,400: INFO: cloud_storage_push: Uploaded artifacts\evaluation\roc_curve_20250714T094502.png to bucket databucket632.]
+[2025-07-14 10:05:28,642: INFO: cloud_storage_push: Uploaded artifacts\evaluation\roc_curve_20250714T095019.png to bucket databucket632.]
+[2025-07-14 10:05:28,931: INFO: cloud_storage_push: Uploaded artifacts\evaluation\roc_curve_20250714T100347.png to bucket databucket632.]
+[2025-07-14 10:05:29,126: INFO: cloud_storage_push: Uploaded artifacts\data_version\input_raw_data_version_20250714T095013.csv to bucket databucket632.]
+[2025-07-14 10:05:41,229: INFO: cloud_storage_push: Uploaded artifacts\data_version\input_raw_data_version_20250714T100341.csv to bucket databucket632.]
+[2025-07-14 10:05:41,896: INFO: cloud_storage_push: Uploaded artifacts\data_version\processed_data_version_20250714T095013.csv to bucket databucket632.]
+[2025-07-14 10:05:43,227: INFO: cloud_storage_push: Uploaded artifacts\data_version\processed_data_version_20250714T100341.csv to bucket databucket632.]
+[2025-07-14 10:05:43,419: WARNING: connectionpool: Connection pool is full, discarding connection: databucket632.s3.ap-southeast-2.amazonaws.com. Connection pool size: 10]
+[2025-07-14 10:05:43,420: INFO: cloud_storage_push: Uploaded artifacts\data_version\processed_data_version_20250714T094455.csv to bucket databucket632.]
+[2025-07-14 10:05:43,846: WARNING: connectionpool: Connection pool is full, discarding connection: databucket632.s3.ap-southeast-2.amazonaws.com. Connection pool size: 10]
+[2025-07-14 10:05:43,848: INFO: cloud_storage_push: Uploaded artifacts\data_version\processed_data_version_20250714T094126.csv to bucket databucket632.]
+[2025-07-14 10:05:43,849: INFO: cloud_storage_push: Successfully uploaded 24 files to S3 bucket: databucket632]
+[2025-07-14 10:05:43,849: INFO: cloud_storage_push: >>> Stage Cloud Storage Push completed <<<]
+[2025-07-14 10:05:43,849: INFO: test_pipeline: Cloud storage push completed successfully]
+[2025-07-14 10:05:43,850: INFO: test_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push completed <<<<<<
+
+x====================x]
+[2025-07-14 10:05:43,850: INFO: clean_up: ==================================================]
+[2025-07-14 10:05:43,850: INFO: clean_up: CLEANUP: Removing temporary versioned files]
+[2025-07-14 10:05:43,850: INFO: clean_up: ==================================================]
+[2025-07-14 10:05:43,854: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:05:43,855: INFO: common: created directory at: artifacts]
+[2025-07-14 10:05:43,856: INFO: clean_up: Found 12 timestamp-versioned data files to clean]
+[2025-07-14 10:05:43,857: INFO: clean_up: Deleted temporary file: featured_data_version_20250714T094126.csv]
+[2025-07-14 10:05:43,858: INFO: clean_up: Deleted temporary file: featured_data_version_20250714T094455.csv]
+[2025-07-14 10:05:43,860: INFO: clean_up: Deleted temporary file: featured_data_version_20250714T095013.csv]
+[2025-07-14 10:05:43,861: INFO: clean_up: Deleted temporary file: featured_data_version_20250714T100341.csv]
+[2025-07-14 10:05:43,862: INFO: clean_up: Deleted temporary file: input_raw_data_version_20250714T094126.csv]
+[2025-07-14 10:05:43,864: INFO: clean_up: Deleted temporary file: input_raw_data_version_20250714T094455.csv]
+[2025-07-14 10:05:43,865: INFO: clean_up: Deleted temporary file: input_raw_data_version_20250714T095013.csv]
+[2025-07-14 10:05:43,866: INFO: clean_up: Deleted temporary file: input_raw_data_version_20250714T100341.csv]
+[2025-07-14 10:05:43,867: INFO: clean_up: Deleted temporary file: processed_data_version_20250714T094126.csv]
+[2025-07-14 10:05:43,868: INFO: clean_up: Deleted temporary file: processed_data_version_20250714T094455.csv]
+[2025-07-14 10:05:43,870: INFO: clean_up: Deleted temporary file: processed_data_version_20250714T095013.csv]
+[2025-07-14 10:05:43,871: INFO: clean_up: Deleted temporary file: processed_data_version_20250714T100341.csv]
+[2025-07-14 10:05:43,872: INFO: clean_up: Found 12 timestamp-versioned evaluation files to clean]
+[2025-07-14 10:05:43,872: INFO: clean_up: Deleted temporary file: metrics_20250714T094502.json]
+[2025-07-14 10:05:43,873: INFO: clean_up: Deleted temporary file: metrics_20250714T095019.json]
+[2025-07-14 10:05:43,873: INFO: clean_up: Deleted temporary file: metrics_20250714T100347.json]
+[2025-07-14 10:05:43,874: INFO: clean_up: Deleted temporary file: confusion_matrix_20250714T094502.png]
+[2025-07-14 10:05:43,874: INFO: clean_up: Deleted temporary file: confusion_matrix_20250714T095019.png]
+[2025-07-14 10:05:43,875: INFO: clean_up: Deleted temporary file: confusion_matrix_20250714T100347.png]
+[2025-07-14 10:05:43,875: INFO: clean_up: Deleted temporary file: precision_recall_curve_20250714T094502.png]
+[2025-07-14 10:05:43,876: INFO: clean_up: Deleted temporary file: precision_recall_curve_20250714T095019.png]
+[2025-07-14 10:05:43,876: INFO: clean_up: Deleted temporary file: precision_recall_curve_20250714T100347.png]
+[2025-07-14 10:05:43,877: INFO: clean_up: Deleted temporary file: roc_curve_20250714T094502.png]
+[2025-07-14 10:05:43,877: INFO: clean_up: Deleted temporary file: roc_curve_20250714T095019.png]
+[2025-07-14 10:05:43,878: INFO: clean_up: Deleted temporary file: roc_curve_20250714T100347.png]
+[2025-07-14 10:05:43,879: INFO: clean_up: Deleted temporary file: input_raw.csv]
+[2025-07-14 10:05:43,879: INFO: clean_up: Kept 0 essential data files for DVC tracking]
+[2025-07-14 10:05:43,880: INFO: clean_up: Kept 0 essential evaluation files for DVC tracking]
+[2025-07-14 10:06:34,773: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:34,774: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:34,774: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 10:06:34,774: INFO: training_pipeline: MLflow configured with experiment: Fraud_Detection_Experiment]
+[2025-07-14 10:06:35,164: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 10:06:35,170: INFO: helpers: Accessing as minh120103]
+[2025-07-14 10:06:35,563: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/repos/minh120103/E2E_ML "HTTP/1.1 200 OK"]
+[2025-07-14 10:06:35,894: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"]
+[2025-07-14 10:06:35,896: INFO: helpers: Initialized MLflow to track repo "minh120103/E2E_ML"]
+[2025-07-14 10:06:35,897: INFO: helpers: Repository minh120103/E2E_ML initialized!]
+[2025-07-14 10:06:36,323: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:06:36,323: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:36,323: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:06:36,324: INFO: training_pipeline: Data file not found or empty: artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 10:06:36,324: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:06:36,325: INFO: training_pipeline: STAGE 0: Data Import]
+[2025-07-14 10:06:36,325: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:06:36,328: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:36,328: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:36,328: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:06:36,330: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:36,331: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:06:36,397: INFO: main: 1 change detected]
+[2025-07-14 10:06:36,557: INFO: training_pipeline: Data import completed successfully]
+[2025-07-14 10:06:36,557: INFO: training_pipeline: >>>>>> stage Data Ingestion started <<<<<<]
+[2025-07-14 10:06:36,558: INFO: preprocess_data: >>> Stage Data Ingestion stage started <<<]
+[2025-07-14 10:06:36,562: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:36,563: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:36,563: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:06:36,563: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:36,564: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:06:36,564: INFO: data_ingestion: Initiating data ingestion]
+[2025-07-14 10:06:36,564: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 10:06:36,729: INFO: data_ingestion: Loaded dataset with 100000 rows]
+[2025-07-14 10:06:36,731: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 10:06:36,731: INFO: data_ingestion: Starting preprocessing of 100000 rows...]
+[2025-07-14 10:06:36,731: INFO: data_ingestion: Initial columns: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']]
+[2025-07-14 10:06:36,766: INFO: main: 1 change detected]
+[2025-07-14 10:06:36,773: INFO: data_ingestion: After feature engineering columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 10:06:36,774: INFO: data_ingestion: Data shape after feature engineering: (100000, 12)]
+[2025-07-14 10:06:36,787: INFO: data_ingestion: First few rows of feature engineered data: 
+   step      amount  oldbalanceOrg  ...  type_DEBIT  type_PAYMENT  type_TRANSFER
+0   278   330218.42       20866.00  ...           0             0              0
+1    15    11647.08       30370.00  ...           0             1              0
+2    10   152264.21      106589.00  ...           0             0              0
+3   403  1551760.63           0.00  ...           0             0              1
+4   206    78172.30     2921331.58  ...           0             0              0
+
+[5 rows x 12 columns]]
+[2025-07-14 10:06:36,788: INFO: data_ingestion: After encoding columns: ['step', 'amount', 'oldbalanceOrg', 'oldbalanceDest', 'isFraud', 'MoneySpentSender', 'MoneyReceiver', 'type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']]
+[2025-07-14 10:06:36,788: INFO: data_ingestion: Data shape after encoding: (100000, 12)]
+[2025-07-14 10:06:36,795: INFO: data_ingestion: Data shape after removing NaN: (100000, 12)]
+[2025-07-14 10:06:36,798: INFO: data_ingestion: X shape (features): (100000, 11)]
+[2025-07-14 10:06:36,799: INFO: data_ingestion: y shape (target): (100000,)]
+[2025-07-14 10:06:36,799: INFO: data_ingestion: Target variable shape: (100000,)]
+[2025-07-14 10:06:36,800: INFO: data_ingestion: NaN count in target: 0]
+[2025-07-14 10:06:36,803: INFO: data_ingestion: Target variable distribution: 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 10:06:36,804: INFO: data_ingestion: Final feature matrix shape: (100000, 11)]
+[2025-07-14 10:06:36,805: INFO: data_ingestion: Final target vector shape: (100000,)]
+[2025-07-14 10:06:36,807: INFO: data_ingestion: Target variable distribution (normalized): 
+isFraud
+0    0.99859
+1    0.00141
+Name: proportion, dtype: float64]
+[2025-07-14 10:06:36,807: INFO: data_ingestion: Target variable is imbalanced. Applying SMOTE...]
+[2025-07-14 10:06:36,864: INFO: data_ingestion: Resampled feature matrix shape: (199718, 11)]
+[2025-07-14 10:06:36,867: INFO: data_ingestion: Resampled target distribution: 
+isFraud
+0    99859
+1    99859
+Name: count, dtype: int64]
+[2025-07-14 10:06:37,122: INFO: main: 1 change detected]
+[2025-07-14 10:06:37,481: INFO: main: 1 change detected]
+[2025-07-14 10:06:37,839: INFO: main: 3 changes detected]
+[2025-07-14 10:06:38,191: INFO: main: 3 changes detected]
+[2025-07-14 10:06:38,551: INFO: main: 1 change detected]
+[2025-07-14 10:06:38,556: INFO: data_ingestion: Created versioned input data file: artifacts\data_version\input_raw_data_version_20250714T100636.csv]
+[2025-07-14 10:06:38,557: INFO: data_ingestion: Created versioned processed data file: artifacts\data_version\processed_data_version_20250714T100636.csv]
+[2025-07-14 10:06:38,557: INFO: data_ingestion: Created versioned feature engineered data file: artifacts\data_version\featured_data_version_20250714T100636.csv]
+[2025-07-14 10:06:38,558: INFO: data_ingestion: Splitting data into train and test sets]
+[2025-07-14 10:06:38,589: INFO: data_ingestion: Train data: (159774, 11), Test data: (39944, 11)]
+[2025-07-14 10:06:38,590: INFO: data_ingestion: Data ingestion completed successfully]
+[2025-07-14 10:06:38,590: INFO: data_ingestion: Data shape - Train: (159774, 11), Test: (39944, 11)]
+[2025-07-14 10:06:38,593: INFO: preprocess_data: >>> Stage Data Ingestion stage completed <<<]
+[2025-07-14 10:06:38,597: INFO: training_pipeline: >>>>>> stage Data Ingestion completed <<<<<<
+
+x====================x]
+[2025-07-14 10:06:38,597: INFO: training_pipeline: >>>>>> stage Model Training Pipeline started <<<<<<]
+[2025-07-14 10:06:38,602: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:38,602: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:38,603: INFO: configuration: MLFlow configuration: MLFlowConfig(dagshub_username='minh120103', dagshub_repo_name='E2E_ML', tracking_uri='https://dagshub.com/minh120103/E2E_ML.mlflow', experiment_name='Fraud_Detection_Experiment')]
+[2025-07-14 10:06:38,913: INFO: main: 1 change detected]
+[2025-07-14 10:06:38,962: INFO: _client: HTTP Request: GET https://dagshub.com/api/v1/repos/minh120103/E2E_ML "HTTP/1.1 200 OK"]
+[2025-07-14 10:06:38,990: INFO: helpers: Initialized MLflow to track repo "minh120103/E2E_ML"]
+[2025-07-14 10:06:38,991: INFO: helpers: Repository minh120103/E2E_ML initialized!]
+[2025-07-14 10:06:40,067: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:06:40,067: INFO: training_pipeline: Running Model Preparation]
+[2025-07-14 10:06:40,067: INFO: prepare_model: >>> Stage Prepare base model started <<<]
+[2025-07-14 10:06:40,074: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:40,075: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:40,075: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:06:40,076: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:40,076: INFO: configuration: Prepare base model config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'objective': 'binary:logistic', 'max_depth': 6, 'n_estimators': 300, 'random_state': 42, 'learning_rate': 0.1, 'scale_pos_weight': 10, 'n_jobs': -1}]
+[2025-07-14 10:06:40,131: INFO: main: 2 changes detected]
+[2025-07-14 10:06:40,397: INFO: base_model: Creating base model and scaler]
+[2025-07-14 10:06:40,398: INFO: base_model: Creating base XGBoost model]
+[2025-07-14 10:06:40,398: INFO: base_model: Model params:300, 42, 0.1, 6, 10, -1]
+[2025-07-14 10:06:40,399: INFO: base_model: Creating scaler from training data]
+[2025-07-14 10:06:40,472: INFO: base_model: Base model saved: artifacts\model_version\base_model_churn_20250714T100640.pkl]
+[2025-07-14 10:06:40,545: INFO: main: 3 changes detected]
+[2025-07-14 10:06:41,863: INFO: prepare_model: >>> Stage Prepare base model completed <<<]
+[2025-07-14 10:06:41,863: INFO: training_pipeline: Base model created at: artifacts\model_version\base_model_churn_20250714T100640.pkl]
+[2025-07-14 10:06:41,863: INFO: training_pipeline: Scaler created at: artifacts\model_version\scaler_churn_version_20250714T100640.pkl]
+[2025-07-14 10:06:41,864: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:06:41,864: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:06:41,864: INFO: training_pipeline: Running Model Training and Evaluation]
+[2025-07-14 10:06:41,864: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL started <<<]
+[2025-07-14 10:06:41,869: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:41,870: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:41,870: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:06:41,871: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:41,871: INFO: configuration: Training config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version'}]
+[2025-07-14 10:06:41,875: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:06:41,876: INFO: common: created directory at: artifacts]
+[2025-07-14 10:06:41,876: INFO: common: created directory at: artifacts/evaluation]
+[2025-07-14 10:06:41,876: INFO: common: created directory at: artifacts/model_version]
+[2025-07-14 10:06:41,877: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:06:41,877: INFO: configuration: Evaluation config: {'model_version_dir': 'artifacts/model_version', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 10:06:41,878: INFO: model_training: Initiating model training and evaluation with temporary directory management]
+[2025-07-14 10:06:41,878: INFO: model_training: Loaded y_train shape: (159774,)]
+[2025-07-14 10:06:41,878: INFO: model_training: Loaded y_test shape: (39944,)]
+[2025-07-14 10:06:41,879: INFO: model_training: NaN count in y_train: 0]
+[2025-07-14 10:06:41,879: INFO: model_training: NaN count in y_test: 0]
+[2025-07-14 10:06:41,880: INFO: model_training: Final X_train_scaled shape: (159774, 11)]
+[2025-07-14 10:06:41,880: INFO: model_training: Final y_train shape: (159774,)]
+[2025-07-14 10:06:41,880: INFO: model_training: Final X_test_scaled shape: (39944, 11)]
+[2025-07-14 10:06:41,881: INFO: model_training: Final y_test shape: (39944,)]
+[2025-07-14 10:06:41,883: INFO: model_training: Loading model: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.1, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=6,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=300,
+              n_jobs=-1, num_parallel_tree=None, ...)]
+[2025-07-14 10:06:41,884: INFO: model_training: Starting model training for model_fraud_20250714T100641]
+[2025-07-14 10:06:43,039: INFO: model_training: Model training for model_fraud_20250714T100641 completed]
+[2025-07-14 10:06:43,054: INFO: model_training:   trained model file (for future use): artifacts\model_version\model_churn_version_20250714T100641.pkl]
+[2025-07-14 10:06:43,130: INFO: main: 1 change detected]
+[2025-07-14 10:06:43,419: INFO: model_training: Model accuracy on test data: 0.9981974764670539]
+[2025-07-14 10:06:43,419: INFO: model_training: Model accuracy is 85% or above, not needed finetuned, log trained model to mlflow]
+[2025-07-14 10:06:43,419: INFO: model_training: Logging model to MLflow as model_fraud_20250714T100641]
+[2025-07-14 10:06:59,045: INFO: model_training: Successfully registered model under unique name: XGBoost]
+[2025-07-14 10:06:59,045: INFO: model_training: Performing detailed evaluation on test data]
+[2025-07-14 10:06:59,184: INFO: common: json file saved at: artifacts\evaluation\metrics_20250714T100641.json]
+[2025-07-14 10:06:59,185: INFO: model_training: Detailed metrics saved to: artifacts\evaluation\metrics_20250714T100641.json]
+[2025-07-14 10:06:59,363: INFO: main: 1 change detected]
+[2025-07-14 10:07:11,721: INFO: model_training: Creating confusion matrix plot]
+[2025-07-14 10:07:11,825: INFO: model_training: Confusion matrix saved to: artifacts\evaluation\confusion_matrix_20250714T100641.png]
+[2025-07-14 10:07:11,875: INFO: main: 2 changes detected]
+[2025-07-14 10:07:12,722: INFO: model_training: Creating Precision-Recall curve plot]
+[2025-07-14 10:07:12,854: INFO: model_training: Precision-Recall curve saved to: artifacts\evaluation\precision_recall_curve_20250714T100641.png]
+[2025-07-14 10:07:12,887: INFO: main: 2 changes detected]
+[2025-07-14 10:07:13,748: INFO: model_training: Creating ROC curve plot]
+[2025-07-14 10:07:13,875: INFO: model_training: ROC curve saved to: artifacts\evaluation\roc_curve_20250714T100641.png]
+[2025-07-14 10:07:13,911: INFO: main: 2 changes detected]
+[2025-07-14 10:07:14,864: INFO: train_evaluation: >>> Stage TRAIN_AND_EVALUATE_MODEL completed <<<]
+[2025-07-14 10:07:14,864: INFO: training_pipeline: Training and evaluation completed. Final model at: artifacts\model_version\model_churn_version_20250714T100641.pkl]
+[2025-07-14 10:07:14,865: INFO: training_pipeline: Logged Metrics: {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1_score': 0.9982059204624738, 'roc_auc': 0.9999928674808555, 'mcc': 0.9964010044780308, 'avg_precision': 0.9999927418432609, 'classification_report': {'0': {'precision': 0.9999496043944968, 'recall': 0.9964344900316376, 'f1-score': 0.9981889526109267, 'support': 19913.0}, '1': {'precision': 0.9964678374210238, 'recall': 0.9999500773800609, 'f1-score': 0.9982059204624738, 'support': 20031.0}, 'accuracy': 0.9981974764670539, 'macro avg': {'precision': 0.9982087209077604, 'recall': 0.9981922837058492, 'f1-score': 0.9981974365367002, 'support': 39944.0}, 'weighted avg': {'precision': 0.9982035781015458, 'recall': 0.9981974764670539, 'f1-score': 0.998197461599369, 'support': 39944.0}}}]
+[2025-07-14 10:07:14,866: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:07:15,577: INFO: training_pipeline: >>>>>> stage Model Training Pipeline completed <<<<<<
+
+x====================x]
+[2025-07-14 10:07:15,577: INFO: training_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push started <<<<<<]
+[2025-07-14 10:07:15,577: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:07:15,578: INFO: training_pipeline: STAGE 4: Cloud Storage Push]
+[2025-07-14 10:07:15,578: INFO: training_pipeline: ==================================================]
+[2025-07-14 10:07:15,578: INFO: cloud_storage_push: >>> Stage Cloud Storage Push started <<<]
+[2025-07-14 10:07:15,582: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:07:15,583: INFO: common: created directory at: artifacts]
+[2025-07-14 10:07:15,585: INFO: configuration: Cloud Storage Push config: {'root_dir': 'artifacts', 'bucket_name': 'databucket632', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 10:07:15,825: INFO: cloud_storage_push: Ensured directory structure exists for cloud storage push]
+[2025-07-14 10:07:15,825: INFO: cloud_storage_push: Starting cloud storage push process...]
+[2025-07-14 10:07:15,878: INFO: main: 1 change detected]
+[2025-07-14 10:07:16,527: INFO: cloud_storage_push: Bucket 'databucket632' exists and is accessible]
+[2025-07-14 10:07:16,529: INFO: cloud_storage_push: Found 7 files to upload to cloud storage.]
+[2025-07-14 10:07:17,385: INFO: cloud_storage_push: Uploaded artifacts\evaluation\confusion_matrix_20250714T100641.png to bucket databucket632.]
+[2025-07-14 10:07:17,390: INFO: cloud_storage_push: Uploaded artifacts\evaluation\metrics_20250714T100641.json to bucket databucket632.]
+[2025-07-14 10:07:17,507: INFO: cloud_storage_push: Uploaded artifacts\evaluation\roc_curve_20250714T100641.png to bucket databucket632.]
+[2025-07-14 10:07:17,532: INFO: cloud_storage_push: Uploaded artifacts\evaluation\precision_recall_curve_20250714T100641.png to bucket databucket632.]
+[2025-07-14 10:07:28,241: INFO: main: 1 change detected]
+[2025-07-14 10:07:28,599: INFO: main: 1 change detected]
+[2025-07-14 10:07:28,959: INFO: main: 1 change detected]
+[2025-07-14 10:07:29,366: INFO: main: 1 change detected]
+[2025-07-14 10:07:29,772: INFO: main: 1 change detected]
+[2025-07-14 10:07:30,176: INFO: main: 1 change detected]
+[2025-07-14 10:07:30,583: INFO: main: 1 change detected]
+[2025-07-14 10:07:30,994: INFO: main: 1 change detected]
+[2025-07-14 10:07:31,396: INFO: main: 1 change detected]
+[2025-07-14 10:07:31,800: INFO: main: 1 change detected]
+[2025-07-14 10:07:32,212: INFO: main: 1 change detected]
+[2025-07-14 10:07:32,627: INFO: main: 1 change detected]
+[2025-07-14 10:07:33,032: INFO: main: 1 change detected]
+[2025-07-14 10:07:33,409: INFO: cloud_storage_push: Uploaded artifacts\data_version\featured_data_version_20250714T100636.csv to bucket databucket632.]
+[2025-07-14 10:07:33,433: INFO: main: 1 change detected]
+[2025-07-14 10:07:33,839: INFO: main: 1 change detected]
+[2025-07-14 10:07:34,245: INFO: main: 1 change detected]
+[2025-07-14 10:07:34,654: INFO: main: 1 change detected]
+[2025-07-14 10:07:34,686: INFO: cloud_storage_push: Uploaded artifacts\data_version\processed_data_version_20250714T100636.csv to bucket databucket632.]
+[2025-07-14 10:07:35,057: INFO: main: 1 change detected]
+[2025-07-14 10:07:35,473: INFO: main: 1 change detected]
+[2025-07-14 10:07:35,876: INFO: main: 1 change detected]
+[2025-07-14 10:07:36,246: INFO: main: 1 change detected]
+[2025-07-14 10:07:36,659: INFO: main: 1 change detected]
+[2025-07-14 10:07:37,067: INFO: main: 1 change detected]
+[2025-07-14 10:07:37,473: INFO: main: 1 change detected]
+[2025-07-14 10:07:37,601: INFO: cloud_storage_push: Uploaded artifacts\data_version\input_raw_data_version_20250714T100636.csv to bucket databucket632.]
+[2025-07-14 10:07:37,602: INFO: cloud_storage_push: Successfully uploaded 7 files to S3 bucket: databucket632]
+[2025-07-14 10:07:37,602: INFO: cloud_storage_push: >>> Stage Cloud Storage Push completed <<<]
+[2025-07-14 10:07:37,602: INFO: training_pipeline: Cloud storage push completed successfully]
+[2025-07-14 10:07:37,603: INFO: training_pipeline: >>>>>> stage STAGE 4: Cloud Storage Push completed <<<<<<
+
+x====================x]
+[2025-07-14 10:07:37,603: INFO: clean_up: ==================================================]
+[2025-07-14 10:07:37,603: INFO: clean_up: CLEANUP: Removing temporary versioned files]
+[2025-07-14 10:07:37,603: INFO: clean_up: ==================================================]
+[2025-07-14 10:07:37,607: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:07:37,608: INFO: common: created directory at: artifacts]
+[2025-07-14 10:07:37,609: INFO: clean_up: Found 3 timestamp-versioned data files to clean]
+[2025-07-14 10:07:37,610: INFO: clean_up: Deleted temporary file: featured_data_version_20250714T100636.csv]
+[2025-07-14 10:07:37,612: INFO: clean_up: Deleted temporary file: input_raw_data_version_20250714T100636.csv]
+[2025-07-14 10:07:37,613: INFO: clean_up: Deleted temporary file: processed_data_version_20250714T100636.csv]
+[2025-07-14 10:07:37,614: INFO: clean_up: Found 4 timestamp-versioned evaluation files to clean]
+[2025-07-14 10:07:37,615: INFO: clean_up: Deleted temporary file: metrics_20250714T100641.json]
+[2025-07-14 10:07:37,615: INFO: clean_up: Deleted temporary file: confusion_matrix_20250714T100641.png]
+[2025-07-14 10:07:37,616: INFO: clean_up: Deleted temporary file: precision_recall_curve_20250714T100641.png]
+[2025-07-14 10:07:37,616: INFO: clean_up: Deleted temporary file: roc_curve_20250714T100641.png]
+[2025-07-14 10:07:37,617: INFO: clean_up: Deleted temporary file: input_raw.csv]
+[2025-07-14 10:07:37,618: INFO: clean_up: Kept 0 essential data files for DVC tracking]
+[2025-07-14 10:07:37,618: INFO: clean_up: Kept 0 essential evaluation files for DVC tracking]
+[2025-07-14 10:07:37,830: INFO: main: 10 changes detected]
+[2025-07-14 10:07:38,190: INFO: main: 1 change detected]
+[2025-07-14 10:07:38,552: INFO: main: 2 changes detected]
+[2025-07-14 10:07:38,916: INFO: main: 1 change detected]
+[2025-07-14 10:07:39,274: INFO: main: 1 change detected]
+[2025-07-14 10:07:39,684: INFO: main: 1 change detected]
+[2025-07-14 10:07:40,090: INFO: main: 1 change detected]
+[2025-07-14 10:07:40,496: INFO: main: 1 change detected]
+[2025-07-14 10:07:40,903: INFO: main: 1 change detected]
+[2025-07-14 10:07:41,308: INFO: main: 1 change detected]
+[2025-07-14 10:07:41,713: INFO: main: 1 change detected]
+[2025-07-14 10:07:42,122: INFO: main: 1 change detected]
+[2025-07-14 10:07:42,525: INFO: main: 1 change detected]
+[2025-07-14 10:07:42,933: INFO: main: 1 change detected]
+[2025-07-14 10:07:43,342: INFO: main: 1 change detected]
+[2025-07-14 10:07:43,760: INFO: main: 1 change detected]
+[2025-07-14 10:07:44,122: INFO: main: 1 change detected]
+[2025-07-14 10:07:44,582: INFO: main: 1 change detected]
+[2025-07-14 10:07:44,943: INFO: main: 1 change detected]
+[2025-07-14 10:07:45,353: INFO: main: 1 change detected]
+[2025-07-14 10:07:45,758: INFO: main: 1 change detected]
+[2025-07-14 10:07:46,165: INFO: main: 1 change detected]
+[2025-07-14 10:07:46,573: INFO: main: 1 change detected]
+[2025-07-14 10:07:46,981: INFO: main: 1 change detected]
+[2025-07-14 10:07:47,338: INFO: main: 1 change detected]
+[2025-07-14 10:07:47,746: INFO: main: 1 change detected]
+[2025-07-14 10:07:48,152: INFO: main: 1 change detected]
+[2025-07-14 10:07:48,560: INFO: main: 1 change detected]
+[2025-07-14 10:07:48,966: INFO: main: 1 change detected]
+[2025-07-14 10:07:49,371: INFO: main: 1 change detected]
+[2025-07-14 10:07:49,777: INFO: main: 1 change detected]
+[2025-07-14 10:07:50,186: INFO: main: 1 change detected]
+[2025-07-14 10:07:50,590: INFO: main: 1 change detected]
+[2025-07-14 10:07:50,996: INFO: main: 1 change detected]
+[2025-07-14 10:07:51,351: INFO: main: 1 change detected]
+[2025-07-14 10:07:51,766: INFO: main: 1 change detected]
+[2025-07-14 10:07:52,178: INFO: main: 1 change detected]
+[2025-07-14 10:07:52,585: INFO: main: 1 change detected]
+[2025-07-14 10:07:52,990: INFO: main: 1 change detected]
+[2025-07-14 10:07:53,345: INFO: main: 1 change detected]
+[2025-07-14 10:07:53,760: INFO: main: 1 change detected]
+[2025-07-14 10:07:54,169: INFO: main: 1 change detected]
+[2025-07-14 10:07:54,527: INFO: main: 1 change detected]
+[2025-07-14 10:07:54,937: INFO: main: 1 change detected]
+[2025-07-14 10:07:55,343: INFO: main: 1 change detected]
+[2025-07-14 10:07:55,750: INFO: main: 1 change detected]
+[2025-07-14 10:07:56,156: INFO: main: 1 change detected]
+[2025-07-14 10:07:56,559: INFO: main: 1 change detected]
+[2025-07-14 10:07:56,921: INFO: main: 1 change detected]
+[2025-07-14 10:07:57,326: INFO: main: 1 change detected]
+[2025-07-14 10:07:57,731: INFO: main: 1 change detected]
+[2025-07-14 10:07:58,132: INFO: main: 1 change detected]
+[2025-07-14 10:07:58,488: INFO: main: 1 change detected]
+[2025-07-14 10:07:58,901: INFO: main: 1 change detected]
+[2025-07-14 10:07:59,312: INFO: main: 1 change detected]
+[2025-07-14 10:07:59,670: INFO: main: 1 change detected]
+[2025-07-14 10:08:00,086: INFO: main: 1 change detected]
+[2025-07-14 10:08:00,496: INFO: main: 1 change detected]
+[2025-07-14 10:08:00,857: INFO: main: 1 change detected]
+[2025-07-14 10:08:01,268: INFO: main: 1 change detected]
+[2025-07-14 10:08:01,675: INFO: main: 1 change detected]
+[2025-07-14 10:08:02,079: INFO: main: 1 change detected]
+[2025-07-14 10:08:02,486: INFO: main: 1 change detected]
+[2025-07-14 10:08:02,896: INFO: main: 1 change detected]
+[2025-07-14 10:08:03,313: INFO: main: 1 change detected]
+[2025-07-14 10:08:03,666: INFO: main: 1 change detected]
+[2025-07-14 10:08:04,077: INFO: main: 1 change detected]
+[2025-07-14 10:08:04,494: INFO: main: 1 change detected]
+[2025-07-14 10:08:04,648: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:08:04,649: INFO: common: created directory at: artifacts]
+[2025-07-14 10:08:04,649: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:08:04,650: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:08:04,650: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:08:04,654: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:08:04,655: INFO: common: created directory at: artifacts]
+[2025-07-14 10:08:04,655: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:08:04,656: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:08:04,656: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:08:04,847: INFO: main: 1 change detected]
+[2025-07-14 10:08:05,205: INFO: main: 2 changes detected]
+[2025-07-14 10:08:05,564: INFO: main: 1 change detected]
+[2025-07-14 10:08:05,928: INFO: main: 1 change detected]
+[2025-07-14 10:08:06,338: INFO: main: 1 change detected]
+[2025-07-14 10:08:06,742: INFO: main: 1 change detected]
+[2025-07-14 10:08:07,097: INFO: main: 1 change detected]
+[2025-07-14 10:08:07,511: INFO: main: 1 change detected]
+[2025-07-14 10:08:07,919: INFO: main: 1 change detected]
+[2025-07-14 10:08:08,325: INFO: main: 1 change detected]
+[2025-07-14 10:08:08,737: INFO: main: 1 change detected]
+[2025-07-14 10:08:09,158: INFO: main: 1 change detected]
+[2025-07-14 10:08:09,572: INFO: main: 1 change detected]
+[2025-07-14 10:08:09,946: INFO: main: 1 change detected]
+[2025-07-14 10:08:10,205: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:08:10,206: INFO: common: created directory at: artifacts]
+[2025-07-14 10:08:10,207: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-07-14 10:08:10,207: INFO: common: created directory at: artifacts/data_version]
+[2025-07-14 10:08:10,207: INFO: configuration: Data Ingestion config: {'root_dir': 'artifacts/data_ingestion', 'data_version_dir': 'artifacts/data_version', 'local_data_file': 'artifacts/data_ingestion/input_raw.csv', 'test_size': 0.2, 'random_state': 42, 'bucket_name': 'databucket632'}]
+[2025-07-14 10:08:10,348: INFO: main: 1 change detected]
+[2025-07-14 10:08:10,762: INFO: main: 1 change detected]
+[2025-07-14 10:08:10,997: INFO: data_ingestion: Loading data from artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 10:08:11,014: INFO: data_ingestion: Loaded dataset with 10000 rows]
+[2025-07-14 10:08:11,014: INFO: data_ingestion: Columns found: ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFlaggedFraud']]
+[2025-07-14 10:08:11,172: INFO: main: 1 change detected]
+[2025-07-14 10:08:11,577: INFO: main: 1 change detected]
+[2025-07-14 10:08:11,935: INFO: main: 1 change detected]
+[2025-07-14 10:08:12,346: INFO: main: 1 change detected]
+[2025-07-14 10:08:12,754: INFO: main: 1 change detected]
+[2025-07-14 10:08:13,160: INFO: main: 1 change detected]
+[2025-07-14 10:08:13,376: INFO: predict_compo: Successfully saved prediction results to C:\Users\minh1\AppData\Local\Temp\tmpw46_h8rh.csv and logged as MLflow artifact]
+[2025-07-14 10:08:13,381: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-07-14 10:08:13,382: INFO: common: created directory at: artifacts]
+[2025-07-14 10:08:13,382: INFO: configuration: Cloud Storage Push config: {'root_dir': 'artifacts', 'bucket_name': 'databucket632', 'data_version_dir': 'artifacts/data_version', 'evaluation_dir': 'artifacts/evaluation'}]
+[2025-07-14 10:08:13,544: INFO: cloud_storage_push: Ensured directory structure exists for cloud storage push]
+[2025-07-14 10:08:13,566: INFO: main: 1 change detected]
+[2025-07-14 10:08:13,971: INFO: main: 1 change detected]
+[2025-07-14 10:08:14,253: INFO: cloud_storage_push: Bucket 'databucket632' exists and is accessible]
+[2025-07-14 10:08:14,383: INFO: main: 1 change detected]
+[2025-07-14 10:08:14,748: INFO: main: 1 change detected]
+[2025-07-14 10:08:15,159: INFO: main: 1 change detected]
+[2025-07-14 10:08:15,451: INFO: predict_compo: Deleted temporary prediction file: C:\Users\minh1\AppData\Local\Temp\tmpw46_h8rh.csv]
+[2025-07-14 10:08:15,452: INFO: predict_compo: Prediction processing time: 5.25 seconds]
+[2025-07-14 10:08:15,452: INFO: predict_compo: Started at: 2025-07-14 10:08:10]
+[2025-07-14 10:08:15,452: INFO: predict_compo: Completed at: 2025-07-14 10:08:15]
+[2025-07-14 10:08:15,519: INFO: main: 1 change detected]
+[2025-07-14 10:08:15,925: INFO: main: 1 change detected]
+[2025-07-14 10:08:16,329: INFO: main: 1 change detected]
+[2025-07-14 10:08:16,732: INFO: main: 1 change detected]
+[2025-07-14 10:08:17,137: INFO: main: 1 change detected]
+[2025-07-14 10:08:17,547: INFO: main: 1 change detected]
+[2025-07-14 10:08:17,950: INFO: main: 1 change detected]
+[2025-07-14 10:08:18,356: INFO: main: 1 change detected]
+[2025-07-14 10:08:18,766: INFO: main: 1 change detected]
+[2025-07-14 10:08:19,175: INFO: main: 1 change detected]
+[2025-07-14 10:08:19,580: INFO: main: 1 change detected]
+[2025-07-14 10:08:19,947: INFO: main: 1 change detected]
+[2025-07-14 10:08:20,349: INFO: main: 1 change detected]
+[2025-07-14 10:08:20,763: INFO: main: 1 change detected]
+[2025-07-14 10:08:21,119: INFO: main: 1 change detected]
+[2025-07-14 10:08:21,528: INFO: main: 1 change detected]
+[2025-07-14 10:08:21,934: INFO: main: 1 change detected]
+[2025-07-14 10:08:21,991: INFO: predict_compo: Cleanup: Deleted input file artifacts\data_ingestion\input_raw.csv]
+[2025-07-14 10:08:22,290: INFO: main: 1 change detected]
+[2025-07-14 10:08:22,702: INFO: main: 2 changes detected]
+[2025-07-14 10:08:23,055: INFO: main: 1 change detected]
+[2025-07-14 10:08:23,408: INFO: main: 1 change detected]
+[2025-07-14 10:08:23,768: INFO: main: 1 change detected]
+[2025-07-14 10:08:24,129: INFO: main: 1 change detected]
+[2025-07-14 10:08:24,489: INFO: main: 1 change detected]
+[2025-07-14 10:08:24,904: INFO: main: 1 change detected]
+[2025-07-14 10:08:25,308: INFO: main: 1 change detected]
+[2025-07-14 10:08:25,664: INFO: main: 1 change detected]
+[2025-07-14 10:08:26,072: INFO: main: 1 change detected]
+[2025-07-14 10:08:26,475: INFO: main: 1 change detected]
+[2025-07-14 10:08:26,897: INFO: main: 1 change detected]
+[2025-07-14 10:08:27,302: INFO: main: 1 change detected]
+[2025-07-14 10:08:27,719: INFO: main: 1 change detected]
+[2025-07-14 10:08:28,133: INFO: main: 1 change detected]
+[2025-07-14 10:08:28,549: INFO: main: 1 change detected]
+[2025-07-14 10:08:28,908: INFO: main: 1 change detected]
+[2025-07-14 10:08:29,316: INFO: main: 1 change detected]
+[2025-07-14 10:08:29,722: INFO: main: 1 change detected]
+[2025-07-14 10:08:30,135: INFO: main: 1 change detected]
+[2025-07-14 10:08:30,547: INFO: main: 1 change detected]
+[2025-07-14 10:08:30,952: INFO: main: 1 change detected]
+[2025-07-14 10:08:31,359: INFO: main: 1 change detected]
+[2025-07-14 10:08:31,767: INFO: main: 1 change detected]
+[2025-07-14 10:08:32,172: INFO: main: 1 change detected]
+[2025-07-14 10:08:32,575: INFO: main: 1 change detected]
+[2025-07-14 10:08:32,982: INFO: main: 1 change detected]
+[2025-07-14 10:08:33,387: INFO: main: 1 change detected]
+[2025-07-14 10:08:33,792: INFO: main: 1 change detected]
+[2025-07-14 10:08:34,146: INFO: main: 1 change detected]
+[2025-07-14 10:08:34,557: INFO: main: 1 change detected]
+[2025-07-14 10:08:34,971: INFO: main: 1 change detected]
+[2025-07-14 10:08:35,326: INFO: main: 1 change detected]
+[2025-07-14 10:08:35,730: INFO: main: 1 change detected]
+[2025-07-14 10:08:36,132: INFO: main: 1 change detected]
+[2025-07-14 10:08:36,547: INFO: main: 1 change detected]
+[2025-07-14 10:08:36,953: INFO: main: 1 change detected]
+[2025-07-14 10:08:37,315: INFO: main: 1 change detected]
+[2025-07-14 10:08:37,730: INFO: main: 1 change detected]
+[2025-07-14 10:08:38,139: INFO: main: 1 change detected]
+[2025-07-14 10:08:38,546: INFO: main: 1 change detected]
+[2025-07-14 10:08:38,961: INFO: main: 1 change detected]
+[2025-07-14 10:08:39,378: INFO: main: 1 change detected]
+[2025-07-14 10:08:39,734: INFO: main: 1 change detected]
+[2025-07-14 10:08:40,142: INFO: main: 1 change detected]
+[2025-07-14 10:08:40,556: INFO: main: 1 change detected]
+[2025-07-14 10:08:40,921: INFO: main: 1 change detected]
+[2025-07-14 10:08:41,336: INFO: main: 1 change detected]
+[2025-07-14 10:08:41,742: INFO: main: 1 change detected]
+[2025-07-14 10:08:42,146: INFO: main: 1 change detected]
+[2025-07-14 10:08:42,553: INFO: main: 1 change detected]
+[2025-07-14 10:08:42,916: INFO: main: 1 change detected]
+[2025-07-14 10:08:43,321: INFO: main: 1 change detected]
+[2025-07-14 10:08:43,726: INFO: main: 1 change detected]
+[2025-07-14 10:08:44,141: INFO: main: 1 change detected]
+[2025-07-14 10:08:44,552: INFO: main: 1 change detected]
+[2025-07-14 10:08:44,909: INFO: main: 1 change detected]
+[2025-07-14 10:08:45,323: INFO: main: 1 change detected]
+[2025-07-14 10:08:45,731: INFO: main: 1 change detected]
+[2025-07-14 10:08:46,088: INFO: main: 1 change detected]
+[2025-07-14 10:08:46,500: INFO: main: 1 change detected]
+[2025-07-14 10:08:46,915: INFO: main: 1 change detected]
+[2025-07-14 10:08:47,318: INFO: main: 1 change detected]
+[2025-07-14 10:08:47,731: INFO: main: 1 change detected]
+[2025-07-14 10:08:48,145: INFO: main: 1 change detected]
+[2025-07-14 10:08:48,511: INFO: main: 1 change detected]
+[2025-07-14 10:08:48,926: INFO: main: 1 change detected]
+[2025-07-14 10:08:49,332: INFO: main: 1 change detected]
+[2025-07-14 10:08:49,738: INFO: main: 1 change detected]
+[2025-07-14 10:08:50,142: INFO: main: 1 change detected]

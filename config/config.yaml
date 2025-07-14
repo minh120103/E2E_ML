@@ -5,7 +5,7 @@ data_ingestion:
   local_data_file: artifacts/data_ingestion/input_raw.csv
   test_size: 0.2
   random_state: 42
-  bucket_name: databucket231
+  bucket_name: databucket632
 
 prepare_base_model:
   model_version_dir: artifacts/model_version
@@ -35,6 +35,6 @@ mlflow_config:
 
 cloud_storage_push:
   root_dir: artifacts
-  bucket_name: databucket231
+  bucket_name: databucket632
   data_version_dir: artifacts/data_version  
   evaluation_dir: artifacts/evaluation 
