@@ -32,3 +32,4 @@ setuptools
 python-box
 ensure
 chardet
+imbalanced-learn
