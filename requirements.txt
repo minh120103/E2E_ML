@@ -31,3 +31,4 @@ uvicorn
 setuptools
 python-box
 ensure
+chardet
