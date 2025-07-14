@@ -36,3 +36,4 @@ imbalanced-learn
 joblib
 pathlib
 dagshub
+seaborn
