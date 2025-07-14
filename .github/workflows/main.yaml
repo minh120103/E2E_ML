@@ -86,7 +86,8 @@ jobs:
          aws ecr describe-repositories --region ${{ secrets.AWS_REGION }}  
 
       - name: Debug ECR Registry
-        run: echo "Authenticated ECR: ${{ steps.login-ecr.outputs.registry }}"
+        run: |
+         echo 'Authenticated ECR: ${{ steps.login-ecr.outputs.registry }}'
 
       - name: Pull latest images
         run: |
