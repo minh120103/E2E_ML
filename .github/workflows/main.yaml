@@ -83,11 +83,14 @@ jobs:
       
       - name: Test ECR Login
         run: |
-         aws ecr describe-repositories --region ${{ secrets.AWS_REGION }}   
+         aws ecr describe-repositories --region ${{ secrets.AWS_REGION }}  
+
+      - name: Debug ECR Registry
+        run: echo "Authenticated ECR: ${{ steps.login-ecr.outputs.registry }}"
 
       - name: Pull latest images
         run: |
-         sudo docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+          sudo docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
          
       # - name: Stop and remove container if running
       #   run: |
