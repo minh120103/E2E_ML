@@ -6,14 +6,25 @@ from dotenv import load_dotenv
 from controller.prediction import router as prediction_router
 from controller.training import router as training_router
 import os
+import dagshub
 
 # Load environment variables
 load_dotenv()
 
 os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
 os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
+os.environ['MLFLOW_TRACKING_URI'] = os.getenv('MLFLOW_TRACKING_URI')
 
+# Initialize DagsHub integration
+dagshub.init(repo_owner=os.getenv('MLFLOW_TRACKING_USERNAME'), 
+             repo_name=os.getenv('DAGSHUB_REPO_NAME'), 
+             mlflow=True)
+
+# Configure MLflow tracking URI
 mlflow.set_tracking_uri(os.getenv('MLFLOW_TRACKING_URI'))
+
+# Set experiment
+mlflow.set_experiment(os.getenv('EXPERIMENT_NAME'))
 
 # Create FastAPI app
 app = FastAPI(
