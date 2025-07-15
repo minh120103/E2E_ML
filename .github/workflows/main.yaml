@@ -66,6 +66,11 @@ jobs:
   Continuous-Deployment:
     needs: build-and-push-ecr-image
     runs-on: self-hosted
+
+    env:
+        MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+        MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
