@@ -35,5 +35,5 @@ chardet
 imbalanced-learn
 joblib
 pathlib
-dagshub
+dagshub == 0.5.10
 seaborn
