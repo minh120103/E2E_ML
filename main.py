@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from controller.prediction import router as prediction_router
 from controller.training import router as training_router
 import os
+from dagshub.auth import oauth
 import dagshub
 
 # Load environment variables
@@ -14,6 +15,8 @@ load_dotenv()
 os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
 os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
+auth_url = oauth.oauth_flow_get_url("https://dagshub.com")
+print(f"\n🔗 DAGSHUB AUTHORIZATION LINK:\n{auth_url}\n", flush=True)
 # Initialize DagsHub integration
 dagshub.init(repo_owner='minh120103', repo_name='E2E_ML', mlflow=True)
 
@@ -50,4 +53,4 @@ async def root():
 
 if __name__ == "__main__":
     # uvicorn.run("main:app", host="0.0.0.0", port=8888, reload=True)
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True) #AWS
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, log_level="debug", reload=True) #AWS
