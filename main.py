@@ -5,10 +5,13 @@ import mlflow
 from dotenv import load_dotenv
 from controller.prediction import router as prediction_router
 from controller.training import router as training_router
+import os
 
 # Load environment variables
 load_dotenv()
 
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
 # Create FastAPI app
 app = FastAPI(
