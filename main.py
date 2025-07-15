@@ -15,7 +15,7 @@ os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
 os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
 # Initialize DagsHub integration
-dagshub.init(repo_owner='minh120103', repo_name='E2E_ML', mlflow=True)
+dagshub.init(repo_owner='minh120103', repo_name='E2E_ML', mlflow=True, token=os.getenv("DAGSHUB_TOKEN"))
 
 # Configure MLflow tracking URI
 mlflow.set_tracking_uri('https://dagshub.com/minh120103/E2E_ML.mlflow')
