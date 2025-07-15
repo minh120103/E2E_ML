@@ -13,6 +13,8 @@ load_dotenv()
 os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
 os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
+mlflow.set_tracking_uri(os.getenv('MLFLOW_TRACKING_URI'))
+
 # Create FastAPI app
 app = FastAPI(
     title="Churn Prediction API",
