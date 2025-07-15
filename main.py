@@ -16,15 +16,13 @@ os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 os.environ['MLFLOW_TRACKING_URI'] = os.getenv('MLFLOW_TRACKING_URI')
 
 # Initialize DagsHub integration
-dagshub.init(repo_owner=os.getenv('MLFLOW_TRACKING_USERNAME'), 
-             repo_name=os.getenv('DAGSHUB_REPO_NAME'), 
-             mlflow=True)
+dagshub.init(repo_owner='minh120103', repo_name='E2E_ML', mlflow=True)
 
 # Configure MLflow tracking URI
-mlflow.set_tracking_uri(os.getenv('MLFLOW_TRACKING_URI'))
+mlflow.set_tracking_uri('https://dagshub.com/minh120103/E2E_ML.mlflow')
 
 # Set experiment
-mlflow.set_experiment(os.getenv('EXPERIMENT_NAME'))
+mlflow.set_experiment('Fraud_Detection_Experiment')
 
 # Create FastAPI app
 app = FastAPI(
