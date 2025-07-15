@@ -1,3 +1,4 @@
+import os
 from src.fraud_detection.config.configuration import ConfigurationManager
 from src.fraud_detection.pipelines.preprocess_data import DataPreparationPipeline
 from .prepare_model import ModelPreparationPipeline
@@ -84,6 +85,8 @@ class WorkflowRunner:
             mlflow_config = config_manager.get_mlflow_config()
 
             # Initialize DagsHub for MLflow tracking
+            os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
+            os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
             dagshub.init(repo_owner=mlflow_config.dagshub_username, repo_name=mlflow_config.dagshub_repo_name, mlflow=True)
             mlflow.set_tracking_uri(mlflow_config.tracking_uri)
             mlflow.set_experiment(mlflow_config.experiment_name)
