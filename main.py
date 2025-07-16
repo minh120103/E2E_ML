@@ -8,23 +8,11 @@ from controller.training import router as training_router
 import os
 from dagshub.auth import oauth
 import dagshub
+load_dotenv()
 
 os.environ["PYTHONUNBUFFERED"] = "1"
 
 # Load environment variables
-load_dotenv()
-
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
-
-# Initialize DagsHub integration
-dagshub.init(repo_owner='minh120103', repo_name='E2E_ML', mlflow=True)
-
-# Configure MLflow tracking URI
-mlflow.set_tracking_uri('https://dagshub.com/minh120103/E2E_ML.mlflow')
-
-# Set experiment
-mlflow.set_experiment('Fraud_Detection_Experiment')
 
 # Create FastAPI app
 app = FastAPI(
